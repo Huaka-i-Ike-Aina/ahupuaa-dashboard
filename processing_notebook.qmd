@@ -1,0 +1,247 @@
+---
+title: "Data Processing Notebook"
+format: html
+---
+
+```{r setup-install, include=FALSE}
+
+packages <- c("leaflet", "sf", "dplyr", "knitr")
+
+install_if_missing <- function(pkg) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
+invisible(lapply(packages, install_if_missing))
+invisible(lapply(packages, library, character.only = TRUE))
+
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+```{r ahupuaa-merge-processing}
+raw_ahupuaa_data <- st_read("raw_data/Ahupuaa.geojson")
+
+merged_polygons <- raw_ahupuaa_data %>%
+  group_by(ahupuaa, moku, mokupuni) %>% # add all columns you want to match
+  summarise(geometry = st_union(geometry), .groups = 'drop')
+
+
+st_write(merged_polygons, "processed_data/merged_ahupuaa.geojson")
+
+
+merged_originals <- raw_ahupuaa_data %>%
+  group_by(ahupuaa, moku, mokupuni) %>% # add all columns you want to match
+  filter(n() > 1) %>% # only keep groups with multiple polygons
+  ungroup()
+
+st_write(merged_originals, "processed_data/merged_originals.geojson")
+
+```
+
+```{r raw-map}
+
+# Create map
+map <- leaflet() %>%
+  addTiles(group = "OpenStreetMap") %>%
+  setView(lng = -157.8583, lat = 20.9078, zoom = 7)
+
+
+raw_polygons <- st_read("raw_data/Ahupuaa.geojson")
+
+
+# Function to create adjacency-based coloring
+color_adjacent_polygons <- function(polygons_sf, num_colors = 4) {
+  # Create adjacency matrix
+  adjacency <- st_touches(polygons_sf, sparse = FALSE)
+
+  # Initialize colors
+  n_polygons <- nrow(polygons_sf)
+  colors <- rep(NA, n_polygons)
+  color_palette <- RColorBrewer::brewer.pal(num_colors, "GnBu")
+
+  # Simple greedy coloring algorithm
+  for (i in 1:n_polygons) {
+    # Get neighbors
+    neighbors <- which(adjacency[i, ])
+
+    # Get colors already used by neighbors
+    used_colors <- unique(colors[neighbors])
+    used_colors <- used_colors[!is.na(used_colors)]
+
+    # Find first available color
+    available_colors <- setdiff(1:num_colors, used_colors)
+
+    if (length(available_colors) > 0) {
+      colors[i] <- available_colors[1]
+    } else {
+      # If no color available, use first color (fallback)
+      colors[i] <- 1
+    }
+  }
+
+  # Add colors to the sf object
+  polygons_sf$color_id <- colors
+  polygons_sf$fill_color <- color_palette[colors]
+
+  return(polygons_sf)
+}
+
+
+# Apply coloring
+colored_ahupuaa <- color_adjacent_polygons(raw_polygons, num_colors = 5)
+
+
+# Add ahupuaa polygons
+map <- map %>%
+  addPolygons(
+    data = colored_ahupuaa,
+    label = ~ahupuaa,
+    group = "Ahupuaa Fill",
+    fillColor = ~fill_color,
+    fillOpacity = 0.5,
+    color = ~fill_color,
+    stroke = TRUE,
+    weight = 2,
+  )
+
+map
+```
+
+```{r processed-map}
+
+# Create map
+map <- leaflet() %>%
+  addTiles(group = "OpenStreetMap") %>%
+  setView(lng = -157.8583, lat = 20.9078, zoom = 7)
+
+
+merged_data <- st_read("processed_data/merged_ahupuaa.geojson")
+
+
+# Function to create adjacency-based coloring
+color_adjacent_polygons <- function(polygons_sf, num_colors = 4) {
+  # Create adjacency matrix
+  adjacency <- st_touches(polygons_sf, sparse = FALSE)
+
+  # Initialize colors
+  n_polygons <- nrow(polygons_sf)
+  colors <- rep(NA, n_polygons)
+  color_palette <- RColorBrewer::brewer.pal(num_colors, "GnBu")
+
+  # Simple greedy coloring algorithm
+  for (i in 1:n_polygons) {
+    # Get neighbors
+    neighbors <- which(adjacency[i, ])
+
+    # Get colors already used by neighbors
+    used_colors <- unique(colors[neighbors])
+    used_colors <- used_colors[!is.na(used_colors)]
+
+    # Find first available color
+    available_colors <- setdiff(1:num_colors, used_colors)
+
+    if (length(available_colors) > 0) {
+      colors[i] <- available_colors[1]
+    } else {
+      # If no color available, use first color (fallback)
+      colors[i] <- 1
+    }
+  }
+
+  # Add colors to the sf object
+  polygons_sf$color_id <- colors
+  polygons_sf$fill_color <- color_palette[colors]
+
+  return(polygons_sf)
+}
+
+
+# Apply coloring
+colored_ahupuaa <- color_adjacent_polygons(merged_data, num_colors = 5)
+
+
+# Add ahupuaa polygons
+map <- map %>%
+  addPolygons(
+    data = colored_ahupuaa,
+    label = ~ahupuaa,
+    group = "Ahupuaa Fill",
+    fillColor = ~fill_color,
+    fillOpacity = 0.5,
+    color = ~fill_color,
+    stroke = TRUE,
+    weight = 2,
+  )
+
+map
+```
+
+```{r processed-map-originals}
+
+# Create map
+map <- leaflet() %>%
+  addTiles(group = "OpenStreetMap") %>%
+  setView(lng = -157.8583, lat = 20.9078, zoom = 7)
+
+
+merged_originals <- st_read("processed_data/merged_originals.geojson")
+
+
+# Function to create adjacency-based coloring
+color_adjacent_polygons <- function(polygons_sf, num_colors = 4) {
+  # Create adjacency matrix
+  adjacency <- st_touches(polygons_sf, sparse = FALSE)
+
+  # Initialize colors
+  n_polygons <- nrow(polygons_sf)
+  colors <- rep(NA, n_polygons)
+  color_palette <- RColorBrewer::brewer.pal(num_colors, "Set3")
+
+  # Simple greedy coloring algorithm
+  for (i in 1:n_polygons) {
+    # Get neighbors
+    neighbors <- which(adjacency[i, ])
+
+    # Get colors already used by neighbors
+    used_colors <- unique(colors[neighbors])
+    used_colors <- used_colors[!is.na(used_colors)]
+
+    # Find first available color
+    available_colors <- setdiff(1:num_colors, used_colors)
+
+    if (length(available_colors) > 0) {
+      colors[i] <- available_colors[1]
+    } else {
+      # If no color available, use first color (fallback)
+      colors[i] <- 1
+    }
+  }
+
+  # Add colors to the sf object
+  polygons_sf$color_id <- colors
+  polygons_sf$fill_color <- color_palette[colors]
+
+  return(polygons_sf)
+}
+
+
+# Apply coloring
+colored_originals <- color_adjacent_polygons(merged_originals, num_colors = 5)
+
+
+# Add ahupuaa polygons
+map <- map %>%
+  addPolygons(
+    data = colored_originals,
+    label = ~ahupuaa,
+    group = "Ahupuaa Fill",
+    fillColor = ~fill_color,
+    fillOpacity = 1,
+    color = ~fill_color,
+    stroke = TRUE,
+    weight = 2,
+  )
+
+map
+```
