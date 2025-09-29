@@ -39,209 +39,275 @@ st_write(merged_originals, "processed_data/merged_originals.geojson")
 
 ```
 
-```{r raw-map}
 
-# Create map
-map <- leaflet() %>%
-  addTiles(group = "OpenStreetMap") %>%
-  setView(lng = -157.8583, lat = 20.9078, zoom = 7)
+```{r one-time-ahupuaa-hierarchy}
+# Function to create hierarchical structure from Ahupua'a data
+create_ahupuaa_hierarchy <- function(geojson_data) {
+  # Extract the data frame (removing geometry for processing)
+  df <- st_drop_geometry(geojson_data)
 
+  # Clean and standardize the data
+  df <- df %>%
+    select(mokupuni, moku, ahupuaa) %>%
+    # Remove any rows with missing values
+    filter(!is.na(mokupuni) & !is.na(moku) & !is.na(ahupuaa)) %>%
+    # Remove duplicates
+    distinct() %>%
+    # Sort for consistent ordering
+    arrange(mokupuni, moku, ahupuaa)
 
-raw_polygons <- st_read("raw_data/Ahupuaa.geojson")
+  # Create unique value lists
+  unique_values <- list(
+    mokupuni = sort(unique(df$mokupuni)),
+    moku = sort(unique(df$moku)),
+    ahupuaa = sort(unique(df$ahupuaa))
+  )
 
+  # Create hierarchical structure
+  hierarchy <- list()
 
-# Function to create adjacency-based coloring
-color_adjacent_polygons <- function(polygons_sf, num_colors = 4) {
-  # Create adjacency matrix
-  adjacency <- st_touches(polygons_sf, sparse = FALSE)
+  for (island in unique_values$mokupuni) {
+    island_data <- df[df$mokupuni == island, ]
+    island_moku <- list()
 
-  # Initialize colors
-  n_polygons <- nrow(polygons_sf)
-  colors <- rep(NA, n_polygons)
-  color_palette <- RColorBrewer::brewer.pal(num_colors, "GnBu")
+    for (district in unique(island_data$moku)) {
+      district_data <- island_data[island_data$moku == district, ]
+      district_ahupuaa <- sort(unique(district_data$ahupuaa))
 
-  # Simple greedy coloring algorithm
-  for (i in 1:n_polygons) {
-    # Get neighbors
-    neighbors <- which(adjacency[i, ])
-
-    # Get colors already used by neighbors
-    used_colors <- unique(colors[neighbors])
-    used_colors <- used_colors[!is.na(used_colors)]
-
-    # Find first available color
-    available_colors <- setdiff(1:num_colors, used_colors)
-
-    if (length(available_colors) > 0) {
-      colors[i] <- available_colors[1]
-    } else {
-      # If no color available, use first color (fallback)
-      colors[i] <- 1
+      island_moku[[district]] <- list(
+        name = district,
+        ahupuaa = district_ahupuaa,
+        ahupuaa_count = length(district_ahupuaa)
+      )
     }
+
+    hierarchy[[island]] <- list(
+      name = island,
+      moku = island_moku,
+      moku_count = length(island_moku),
+      total_ahupuaa = sum(sapply(island_moku, function(x) x$ahupuaa_count))
+    )
   }
 
-  # Add colors to the sf object
-  polygons_sf$color_id <- colors
-  polygons_sf$fill_color <- color_palette[colors]
+  # Create summary statistics
+  summary_stats <- list(
+    total_mokupuni = length(unique_values$mokupuni),
+    total_moku = length(unique_values$moku),
+    total_ahupuaa = length(unique_values$ahupuaa),
+    mokupuni_details = sapply(
+      names(hierarchy),
+      function(island) {
+        list(
+          name = island,
+          moku_count = hierarchy[[island]]$moku_count,
+          ahupuaa_count = hierarchy[[island]]$total_ahupuaa
+        )
+      },
+      simplify = FALSE
+    )
+  )
 
-  return(polygons_sf)
+  # Return comprehensive structure
+  result <- list(
+    hierarchy = hierarchy,
+    unique_values = unique_values,
+    summary = summary_stats,
+    flat_structure = df
+  )
+
+  return(result)
+}
+
+# Function to export hierarchy to JSON file
+export_hierarchy_json <- function(
+  hierarchy_result,
+  filename = "ahupuaa_hierarchy.json"
+) {
+  jsonlite::write_json(
+    hierarchy_result,
+    filename,
+    pretty = TRUE,
+    auto_unbox = TRUE
+  )
+  cat("Hierarchy exported to:", filename, "\n")
+}
+
+# Function to print hierarchy in a readable format
+print_hierarchy <- function(hierarchy_result, max_ahupuaa_display = 5) {
+  cat("=== AHUPUA'A HIERARCHICAL STRUCTURE ===\n\n")
+
+  # Print summary
+  cat("SUMMARY:\n")
+  cat(
+    "- Total Mokupuni (Islands):",
+    hierarchy_result$summary$total_mokupuni,
+    "\n"
+  )
+  cat("- Total Moku (Districts):", hierarchy_result$summary$total_moku, "\n")
+  cat("- Total Ahupua'a:", hierarchy_result$summary$total_ahupuaa, "\n\n")
+
+  # Print detailed hierarchy
+  for (island_name in names(hierarchy_result$hierarchy)) {
+    island <- hierarchy_result$hierarchy[[island_name]]
+    cat(
+      "🏝️ ",
+      island_name,
+      " (",
+      island$moku_count,
+      " moku, ",
+      island$total_ahupuaa,
+      " ahupua'a)\n",
+      sep = ""
+    )
+
+    for (moku_name in names(island$moku)) {
+      moku <- island$moku[[moku_name]]
+      cat(
+        "  📍 ",
+        moku_name,
+        " (",
+        moku$ahupuaa_count,
+        " ahupua'a)\n",
+        sep = ""
+      )
+
+      # Display first few ahupua'a
+      ahupuaa_to_show <- head(moku$ahupuaa, max_ahupuaa_display)
+      for (ahupuaa in ahupuaa_to_show) {
+        cat("    - ", ahupuaa, "\n", sep = "")
+      }
+
+      # Show ellipsis if there are more
+      if (length(moku$ahupuaa) > max_ahupuaa_display) {
+        cat("    ... and", length(moku$ahupuaa) - max_ahupuaa_display, "more\n")
+      }
+      cat("\n")
+    }
+  }
+}
+
+# Function to create a simple lookup table
+create_lookup_table <- function(hierarchy_result) {
+  lookup <- hierarchy_result$flat_structure %>%
+    mutate(
+      full_path = paste(mokupuni, moku, ahupuaa, sep = " > "),
+      id = paste(mokupuni, moku, ahupuaa, sep = "_")
+    ) %>%
+    select(id, full_path, mokupuni, moku, ahupuaa)
+
+  return(lookup)
+}
+
+# Function to search within the hierarchy
+search_hierarchy <- function(
+  hierarchy_result,
+  search_term,
+  case_sensitive = FALSE
+) {
+  df <- hierarchy_result$flat_structure
+
+  if (!case_sensitive) {
+    search_term <- tolower(search_term)
+    search_df <- df %>%
+      mutate(
+        mokupuni_lower = tolower(mokupuni),
+        moku_lower = tolower(moku),
+        ahupuaa_lower = tolower(ahupuaa)
+      )
+
+    results <- search_df %>%
+      filter(
+        grepl(search_term, mokupuni_lower) |
+          grepl(search_term, moku_lower) |
+          grepl(search_term, ahupuaa_lower)
+      ) %>%
+      select(mokupuni, moku, ahupuaa)
+  } else {
+    results <- df %>%
+      filter(
+        grepl(search_term, mokupuni) |
+          grepl(search_term, moku) |
+          grepl(search_term, ahupuaa)
+      )
+  }
+
+  return(results)
 }
 
 
-# Apply coloring
-colored_ahupuaa <- color_adjacent_polygons(raw_polygons, num_colors = 5)
-
-
-# Add ahupuaa polygons
-map <- map %>%
-  addPolygons(
-    data = colored_ahupuaa,
-    label = ~ahupuaa,
-    group = "Ahupuaa Fill",
-    fillColor = ~fill_color,
-    fillOpacity = 0.5,
-    color = ~fill_color,
-    stroke = TRUE,
-    weight = 2,
+# Function to create dropdown/select options for UI components
+create_ui_options <- function(hierarchy_result) {
+  # For mokupuni dropdown
+  mokupuni_options <- data.frame(
+    value = hierarchy_result$unique_values$mokupuni,
+    label = hierarchy_result$unique_values$mokupuni,
+    stringsAsFactors = FALSE
   )
 
-map
+  # For moku dropdown (will need to be filtered based on mokupuni selection)
+  moku_options <- hierarchy_result$flat_structure %>%
+    select(mokupuni, moku) %>%
+    distinct() %>%
+    arrange(mokupuni, moku)
+
+  # For ahupuaa dropdown (will need to be filtered based on moku selection)
+  ahupuaa_options <- hierarchy_result$flat_structure %>%
+    select(mokupuni, moku, ahupuaa) %>%
+    distinct() %>%
+    arrange(mokupuni, moku, ahupuaa)
+
+  return(list(
+    mokupuni = mokupuni_options,
+    moku = moku_options,
+    ahupuaa = ahupuaa_options
+  ))
+}
+
+# Display usage instructions
+cat("=== AHUPUA'A HIERARCHY CREATOR ===\n")
+cat("Functions available:\n")
+cat("1. create_ahupuaa_hierarchy(geojson_data) - Main function\n")
+cat("2. print_hierarchy(result) - Display hierarchy\n")
+cat("3. export_hierarchy_json(result, filename) - Export to JSON\n")
+cat("4. create_lookup_table(result) - Create simple lookup\n")
+cat("5. search_hierarchy(result, term) - Search functionality\n")
+cat("6. create_ui_options(result) - Create UI dropdown options\n")
+cat("7. example_usage() - Show example code\n\n")
+cat("Run example_usage() to see how to use these functions!\n")
+
+# Load your data
+ahupuaa_data <- st_read("raw_data/Ahupuaa.geojson")
+
+# Create hierarchy
+hierarchy_result <- create_ahupuaa_hierarchy(ahupuaa_data)
+
+# Access unique values (for dashboard filters)
+unique_islands <- hierarchy_result$unique_values$mokupuni
+unique_districts <- hierarchy_result$unique_values$moku
+unique_ahupuaa <- hierarchy_result$unique_values$ahupuaa
+
+# Access hierarchical structure (for nested navigation)
+oahu_districts <- names(hierarchy_result$hierarchy[["Oʻahu"]]$moku)
+honolulu_ahupuaa <- hierarchy_result$hierarchy[["Oʻahu"]]$moku[[
+  "Honolulu"
+]]$ahupuaa
+
+ui_options <- create_ui_options(hierarchy_result)
+export_hierarchy_json(hierarchy_result, 'processed_data/ahupuaa_hierarchy.json')
+ui_options
+
 ```
 
-```{r processed-map}
 
-# Create map
-map <- leaflet() %>%
-  addTiles(group = "OpenStreetMap") %>%
-  setView(lng = -157.8583, lat = 20.9078, zoom = 7)
+```{r one-time-moku-processing}
+raw_moku_data <- st_read("raw_data/Moku_Ridge_To_Reef_(DAR).geojson")
 
 
-merged_data <- st_read("processed_data/merged_ahupuaa.geojson")
+merged_mokupuni <- raw_ahupuaa_data %>%
+  group_by(mokupuni) %>% # add all columns you want to match
+  summarise(geometry = st_union(geometry), .groups = 'drop')
 
 
-# Function to create adjacency-based coloring
-color_adjacent_polygons <- function(polygons_sf, num_colors = 4) {
-  # Create adjacency matrix
-  adjacency <- st_touches(polygons_sf, sparse = FALSE)
+st_write(merged_mokupuni, "processed_data/merged_mokupuni.geojson")
 
-  # Initialize colors
-  n_polygons <- nrow(polygons_sf)
-  colors <- rep(NA, n_polygons)
-  color_palette <- RColorBrewer::brewer.pal(num_colors, "GnBu")
-
-  # Simple greedy coloring algorithm
-  for (i in 1:n_polygons) {
-    # Get neighbors
-    neighbors <- which(adjacency[i, ])
-
-    # Get colors already used by neighbors
-    used_colors <- unique(colors[neighbors])
-    used_colors <- used_colors[!is.na(used_colors)]
-
-    # Find first available color
-    available_colors <- setdiff(1:num_colors, used_colors)
-
-    if (length(available_colors) > 0) {
-      colors[i] <- available_colors[1]
-    } else {
-      # If no color available, use first color (fallback)
-      colors[i] <- 1
-    }
-  }
-
-  # Add colors to the sf object
-  polygons_sf$color_id <- colors
-  polygons_sf$fill_color <- color_palette[colors]
-
-  return(polygons_sf)
-}
-
-
-# Apply coloring
-colored_ahupuaa <- color_adjacent_polygons(merged_data, num_colors = 5)
-
-
-# Add ahupuaa polygons
-map <- map %>%
-  addPolygons(
-    data = colored_ahupuaa,
-    label = ~ahupuaa,
-    group = "Ahupuaa Fill",
-    fillColor = ~fill_color,
-    fillOpacity = 0.5,
-    color = ~fill_color,
-    stroke = TRUE,
-    weight = 2,
-  )
-
-map
-```
-
-```{r processed-map-originals}
-
-# Create map
-map <- leaflet() %>%
-  addTiles(group = "OpenStreetMap") %>%
-  setView(lng = -157.8583, lat = 20.9078, zoom = 7)
-
-
-merged_originals <- st_read("processed_data/merged_originals.geojson")
-
-
-# Function to create adjacency-based coloring
-color_adjacent_polygons <- function(polygons_sf, num_colors = 4) {
-  # Create adjacency matrix
-  adjacency <- st_touches(polygons_sf, sparse = FALSE)
-
-  # Initialize colors
-  n_polygons <- nrow(polygons_sf)
-  colors <- rep(NA, n_polygons)
-  color_palette <- RColorBrewer::brewer.pal(num_colors, "Set3")
-
-  # Simple greedy coloring algorithm
-  for (i in 1:n_polygons) {
-    # Get neighbors
-    neighbors <- which(adjacency[i, ])
-
-    # Get colors already used by neighbors
-    used_colors <- unique(colors[neighbors])
-    used_colors <- used_colors[!is.na(used_colors)]
-
-    # Find first available color
-    available_colors <- setdiff(1:num_colors, used_colors)
-
-    if (length(available_colors) > 0) {
-      colors[i] <- available_colors[1]
-    } else {
-      # If no color available, use first color (fallback)
-      colors[i] <- 1
-    }
-  }
-
-  # Add colors to the sf object
-  polygons_sf$color_id <- colors
-  polygons_sf$fill_color <- color_palette[colors]
-
-  return(polygons_sf)
-}
-
-
-# Apply coloring
-colored_originals <- color_adjacent_polygons(merged_originals, num_colors = 5)
-
-
-# Add ahupuaa polygons
-map <- map %>%
-  addPolygons(
-    data = colored_originals,
-    label = ~ahupuaa,
-    group = "Ahupuaa Fill",
-    fillColor = ~fill_color,
-    fillOpacity = 1,
-    color = ~fill_color,
-    stroke = TRUE,
-    weight = 2,
-  )
-
-map
 ```

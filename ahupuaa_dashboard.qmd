@@ -1,0 +1,623 @@
+---
+title: "Ahupua'a Dashboard"
+format: 
+  dashboard:
+    orientation: columns
+server: shiny
+preview:
+    port: 4200
+
+---
+```{r}
+#| context: setup
+
+packages <- c("shiny", "jsonlite", "leaflet", "DT", "sf", "dplyr", "purrr")
+
+install_if_missing <- function(pkg) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
+invisible(lapply(packages, install_if_missing))
+invisible(lapply(packages, library, character.only = TRUE))
+
+# Load the hierarchy JSON file
+hierarchy_data <- fromJSON(
+  "processed_data/ahupuaa_hierarchy.json"
+)
+
+# Load base Ahupua'a and moku data
+ahupuaa_data <- st_read(
+  "processed_data/merged_ahupuaa.geojson",
+  quiet = TRUE
+)
+
+moku_data <- st_read("raw_data/Moku_Ridge_To_Reef_(DAR).geojson", quiet = TRUE)
+
+mokupuni_data <- st_read(
+  "processed_data/merged_mokupuni.geojson",
+  quiet = TRUE
+)
+
+
+# Load other spatial datasets
+raingauge_data <- st_read("raw_data/Rain_Gauges.geojson", quiet = TRUE)
+aguse_2015_data <- st_read(
+  "raw_data/Agricultural_Land_Use_-_2015_Baseline.geojson",
+  quiet = TRUE
+) # polygons
+aguse_2020_data <- st_read(
+  "raw_data/Agricultural_Land_Use_-_2020_Update.geojson",
+  quiet = TRUE
+)
+marine_areas_data <- st_read(
+  "raw_data/Marine_Managed_Areas_(DAR).geojson",
+  quiet = TRUE
+)
+annual_rainfall_data <- st_read(
+  "raw_data/Annual_Rainfall_(in).geojson",
+  quiet = TRUE
+)
+threatened_endangered_plants_data <- st_read(
+  "raw_data/Threatened-Endangered_Plants.geojson",
+  quiet = TRUE
+)
+
+```
+
+
+```{r}
+#| context: server
+
+# Server logic for hierarchical selectors
+output$moku_selector <- renderUI({
+  req(input$mokupuni)
+
+  if (input$mokupuni == "") {
+    return(NULL)
+  }
+
+  # Get available moku for selected mokupuni
+  available_moku <- names(hierarchy_data$hierarchy[[input$mokupuni]]$moku)
+
+  selectInput(
+    "moku",
+    "Select Moku (District):",
+    choices = c("Choose District..." = "", available_moku),
+    selected = ""
+  )
+})
+
+output$ahupuaa_selector <- renderUI({
+  req(input$mokupuni, input$moku)
+
+  if (input$mokupuni == "" || input$moku == "") {
+    return(NULL)
+  }
+
+  # Get available ahupua'a for selected moku
+  available_ahupuaa <- hierarchy_data$hierarchy[[input$mokupuni]]$moku[[
+    input$moku
+  ]]$ahupuaa
+
+  selectInput(
+    "ahupuaa",
+    "Select Ahupua'a:",
+    choices = c("Choose Ahupua'a..." = "", available_ahupuaa),
+    selected = ""
+  )
+})
+
+output$selection_info <- renderUI({
+  if (!is.null(input$mokupuni) && input$mokupuni != "") {
+    island_info <- hierarchy_data$hierarchy[[input$mokupuni]]
+
+    info_text <- paste0(
+      "<hr><h4>Current Selection:</h4>",
+      "<strong>Mokupuni:</strong> ",
+      input$mokupuni,
+      "<br>",
+      "<small>",
+      island_info$moku_count,
+      " moku, ",
+      island_info$total_ahupuaa,
+      " ahupua'a total</small>"
+    )
+
+    if (!is.null(input$moku) && input$moku != "") {
+      moku_info <- island_info$moku[[input$moku]]
+      info_text <- paste0(
+        info_text,
+        "<br><strong>Moku:</strong> ",
+        input$moku,
+        "<br>",
+        "<small>",
+        moku_info$ahupuaa_count,
+        " ahupua'a</small>"
+      )
+
+      if (!is.null(input$ahupuaa) && input$ahupuaa != "") {
+        info_text <- paste0(
+          info_text,
+          "<br><strong>Ahupua'a:</strong> ",
+          input$ahupuaa
+        )
+      }
+    }
+
+    HTML(info_text)
+  }
+})
+
+# Reset functionality
+observeEvent(input$reset_selection, {
+  updateSelectInput(session, "mokupuni", selected = "")
+})
+
+
+# Calculate centroids for labeling
+centroids <- st_centroid(ahupuaa_data)
+
+
+# Function to create adjacency-based coloring
+color_adjacent_polygons <- function(polygons_sf, num_colors = 4) {
+  # Create adjacency matrix
+  adjacency <- st_touches(polygons_sf, sparse = FALSE)
+
+  # Initialize colors
+  n_polygons <- nrow(polygons_sf)
+  colors <- rep(NA, n_polygons)
+  color_palette <- RColorBrewer::brewer.pal(num_colors, "GnBu")
+
+  # Simple greedy coloring algorithm
+  for (i in 1:n_polygons) {
+    # Get neighbors
+    neighbors <- which(adjacency[i, ])
+
+    # Get colors already used by neighbors
+    used_colors <- unique(colors[neighbors])
+    used_colors <- used_colors[!is.na(used_colors)]
+
+    # Find first available color
+    available_colors <- setdiff(1:num_colors, used_colors)
+
+    if (length(available_colors) > 0) {
+      colors[i] <- available_colors[1]
+    } else {
+      # If no color available, use first color (fallback)
+      colors[i] <- 1
+    }
+  }
+
+  # Add colors to the sf object
+  polygons_sf$color_id <- colors
+  polygons_sf$fill_color <- color_palette[colors]
+
+  return(polygons_sf)
+}
+
+# Apply coloring
+colored_ahupuaa <- color_adjacent_polygons(ahupuaa_data, num_colors = 5)
+
+# Main map rendering with dynamic content
+output$main_map <- renderLeaflet({
+  # Create base map
+  map <- leaflet() %>%
+    addTiles() %>%
+    addTiles(group = "OpenStreetMap") %>%
+    addProviderTiles("CartoDB.Positron", group = "CartoDB Light") %>%
+    addProviderTiles("CartoDB.DarkMatter", group = "CartoDB Dark") %>%
+    addProviderTiles("Esri.WorldImagery", group = "Satellite") %>%
+    addProviderTiles("Esri.WorldTopoMap", group = "Topographic") %>%
+    setView(lng = -157.8583, lat = 20.9078, zoom = 7)
+
+  # Add ahupuaa polygons
+  map <- map %>%
+    addPolygons(
+      data = colored_ahupuaa,
+      label = ~ahupuaa,
+      group = "Ahupuaa",
+      labelOptions = labelOptions(
+        noHide = FALSE,
+        textOnly = TRUE,
+        direction = "center",
+        offset = c(0, 0),
+        style = list(
+          "color" = "darkgreen",
+          "font-weight" = "bold",
+          "font-size" = "12px"
+        )
+      ),
+      dashArray = c(5, 5),
+      fillOpacity = 0,
+      color = "black",
+      stroke = TRUE,
+      weight = 2,
+    )
+  # Add ahupuaa fill polygons
+  map <- map %>%
+    addPolygons(
+      data = colored_ahupuaa,
+      group = "Ahupuaa Fill",
+      label = ~ahupuaa,
+      labelOptions = labelOptions(
+        noHide = FALSE,
+        textOnly = TRUE,
+        direction = "center",
+        offset = c(0, 0),
+        style = list(
+          "color" = "darkgreen",
+          "font-weight" = "bold",
+          "font-size" = "12px"
+        )
+      ),
+      fillColor = ~fill_color,
+      fillOpacity = 0.5,
+      color = ~fill_color,
+      stroke = TRUE,
+      weight = 2,
+    )
+
+  # Add markers at centroids
+  map <- map %>%
+    addMarkers(
+      data = centroids,
+      group = "Ahupuaa Details",
+      popup = ~ paste0(
+        "<h3>",
+        ahupuaa,
+        "</h3>",
+        "<p><strong>Moku:</strong> ",
+        moku,
+        "</p>",
+        "<p><strong>Mokupuni:</strong> ",
+        mokupuni,
+        "</p>"
+      ),
+      label = ~ahupuaa,
+      clusterOptions = markerClusterOptions()
+    )
+  # Add raingauge circle markers
+  map <- map %>%
+    addCircleMarkers(
+      data = raingauge_data,
+      group = "Raingauges",
+      radius = 8,
+      fillColor = "blue",
+      color = "white",
+      weight = 2,
+      fillOpacity = 0.8,
+      popup = ~ paste0(
+        "<h3>",
+        name,
+        "</h3>",
+        "<p><strong>Elevation:</strong> ",
+        elevft,
+        "</p>",
+        "<p>",
+        stationsta,
+        "</p>"
+      )
+    )
+
+  aguse_crop = c(
+    "Aquaculture",
+    "Banana",
+    "Coffee",
+    "Commercial Forestry",
+    "Seed Production",
+    "Dairy",
+    "Diversified",
+    "Flowers / Foliage / Landscape",
+    "Macadamia Nuts",
+    "Papaya",
+    "Pasture",
+    "Pineapple",
+    "Sugar",
+    "Tropical Fruits",
+    "Taro"
+  )
+  aguse_crop_colors = colorFactor(
+    palette = "Set3",
+    domain = aguse_crop
+  )
+
+  map <- map %>%
+    addPolygons(
+      data = aguse_2015_data,
+      group = "Ag Use 2015",
+      fillColor = ~ aguse_crop_colors(cropcatego),
+      fillOpacity = 1,
+      color = "darkorange",
+      weight = 1,
+      popup = ~ paste0(
+        "<h3>Ag Use 2015</h3>",
+        "<p><strong>Type:</strong> ",
+        cropcatego,
+        "</p>",
+        "<p><strong>Area:</strong> ",
+        acreage,
+        "</p>"
+      )
+    )
+  map <- map %>%
+    addPolygons(
+      data = aguse_2020_data,
+      group = "Ag Use 2020",
+      fillColor = ~ aguse_crop_colors(crops_2020),
+      fillOpacity = 1,
+      color = "gold",
+      weight = 1,
+      popup = ~ paste0(
+        "<h3>Ag Use 2020</h3>",
+        "<p><strong>Type:</strong> ",
+        crops_2020,
+        "</p>",
+        "<p><strong>Area:</strong> ",
+        acreage,
+        "</p>"
+      )
+    )
+  map <- map %>%
+    addPolygons(
+      data = marine_areas_data,
+      group = "Marine Areas",
+      fillColor = "lightgreen",
+      fillOpacity = 0.4,
+      color = "green",
+      weight = 1,
+      popup = ~ paste0(
+        "<h3>",
+        site_label,
+        "</h3>",
+        "<p><strong>Designation:</strong> ",
+        mma_designation,
+        "</p>",
+        "<p><strong>Permitted:</strong> ",
+        permitted,
+        "</p>",
+        "<p><strong>Prohibited:</strong> ",
+        prohibited,
+        "</p>"
+      )
+    )
+
+  # Threatened & Endangered plant density
+  te_density_levels <- c("O", "OL", "L", "M", "H", "VH")
+  te_density_labels = c(
+    "O" = "Little or no T&E species",
+    "L" = "Low concentration of T&E species",
+    "M" = "Medium concentration of T&E species",
+    "H" = "High concentration of T&E species",
+    "VH" = "Very high concentration of T&E species",
+    "OL" = "O in cane fields, L in gullies and coastal areas"
+  )
+  # Convert density to ordered factor
+  threatened_endangered_plants_data <- threatened_endangered_plants_data %>%
+    mutate(
+      density_factor = factor(
+        density,
+        levels = te_density_levels,
+        ordered = TRUE
+      )
+    )
+
+  # Create color palette (light to dark progression)
+  density_colors <- c(
+    "O" = "#ffffcc", # Very light yellow (almost white)
+    "OL" = "#c7e9b4", # Light yellow-green
+    "L" = "#7fcdbb", # Light blue-green
+    "M" = "#41b6c4", # Medium blue
+    "H" = "#2c7fb8", # Dark blue
+    "VH" = "#253494" # Very dark blue
+  )
+
+  # Create color palette function
+  density_pal <- colorFactor(
+    palette = density_colors,
+    domain = te_density_levels,
+    ordered = TRUE
+  )
+
+  map <- map %>%
+    addPolygons(
+      data = threatened_endangered_plants_data,
+      group = "Threatened/Endangered Plants",
+      fillColor = ~ density_pal(density),
+      color = "black",
+      weight = 1,
+      fillOpacity = 0.8,
+      popup = ~ paste0(
+        "<p><strong>Density:</strong> ",
+        te_density_labels[density],
+        "</p>"
+      )
+    )
+
+  # Create color palette for precipitation values
+  precip_pal <- colorNumeric(
+    palette = "RdBu",
+    domain = annual_rainfall_data$contour,
+    reverse = FALSE # Higher values = darker blue
+  )
+
+  # Add isohyet lines
+  map <- map %>%
+    addPolylines(
+      group = "Annual Rainfall (in)",
+      color = ~ precip_pal(contour),
+      fillColor = ~ precip_pal(contour),
+      fillOpacity = 0.7,
+      data = annual_rainfall_data,
+      label = ~ as.character(contour),
+      labelOptions = labelOptions(
+        noHide = TRUE,
+        textOnly = TRUE,
+        direction = "center",
+        offset = c(0, 0),
+        style = list(
+          "color" = "black",
+          "font-weight" = "bold",
+          "font-size" = "12px",
+          "opacity" = 0.5
+        )
+      ),
+      weight = 1.5,
+      opacity = 1,
+      popup = ~ paste(
+        "<b>Isohyet Line</b><br>",
+        "Precipitation:",
+        contour,
+        "in<br>",
+        "Line Length:",
+        round(st_lengthshape, 1),
+        "m"
+      )
+    )
+
+  # Add layer control
+  map <- map %>%
+    addLayersControl(
+      baseGroups = c(
+        "OpenStreetMap",
+        "CartoDB Light",
+        "CartoDB Dark",
+        "Satellite",
+        "Topographic"
+      ),
+      overlayGroups = c(
+        "Ahupuaa Fill",
+        "Raingauges",
+        "Ahupuaa Details",
+        "Annual Rainfall (in)",
+        "Ag Use 2015",
+        "Ag Use 2020",
+        "Marine Areas",
+        "Threatened/Endangered Plants"
+      ), #, "Marine Areas", "Threatened/Endangered Plants"
+      options = layersControlOptions(collapsed = FALSE)
+    ) %>%
+    hideGroup(c(
+      "Raingauges",
+      "Ahupuaa Details",
+      "Annual Rainfall (in)",
+      "Ag Use 2015",
+      "Ag Use 2020",
+      "Marine Areas",
+      "Threatened/Endangered Plants"
+    )) #, "Marine Areas", "Threatened/Endangered Plants"
+})
+
+observe({
+  req(input$mokupuni)
+  if (input$mokupuni != "") {
+    selected_mokupuni <- mokupuni_data %>%
+      filter(mokupuni == input$mokupuni)
+    bbox_obj <- st_bbox(selected_mokupuni)
+    leafletProxy("main_map") %>%
+      flyToBounds(
+        lng1 = bbox_obj[["xmin"]],
+        lat1 = bbox_obj[["ymin"]],
+        lng2 = bbox_obj[["xmax"]],
+        lat2 = bbox_obj[["ymax"]]
+      )
+  }
+})
+
+observe({
+  req(input$moku)
+  if (input$mokupuni != "" && input$moku != "") {
+    selected_moku <- moku_data %>%
+      filter(mokupuni == input$mokupuni, moku == input$moku)
+    bbox_obj <- st_bbox(selected_moku)
+    print(selected_moku)
+    leafletProxy("main_map") %>%
+      removeShape("selected_moku_outline") %>%
+      removeShape("selected_ahupuaa_outline") %>%
+      addPolygons(
+        data = selected_moku,
+        color = "black",
+        weight = 3,
+        fill = FALSE,
+        layerId = "selected_moku_outline"
+      ) %>%
+      flyToBounds(
+        lng1 = bbox_obj[["xmin"]],
+        lat1 = bbox_obj[["ymin"]],
+        lng2 = bbox_obj[["xmax"]],
+        lat2 = bbox_obj[["ymax"]]
+      )
+  }
+})
+
+observe({
+  req(input$ahupuaa)
+  if (input$mokupuni != "" && input$moku != "" && input$ahupuaa != "") {
+    selected_ahupuaa <- ahupuaa_data %>%
+      filter(
+        mokupuni == input$mokupuni,
+        moku == input$moku,
+        ahupuaa == input$ahupuaa
+      )
+    bbox_obj <- st_bbox(selected_ahupuaa)
+    leafletProxy("main_map") %>%
+      removeShape("selected_moku_outline") %>%
+      removeShape("selected_ahupuaa_outline") %>%
+      addPolygons(
+        data = selected_ahupuaa,
+        color = "black",
+        weight = 3,
+        fill = FALSE,
+        layerId = "selected_ahupuaa_outline"
+      ) %>%
+      flyToBounds(
+        lng1 = bbox_obj[["xmin"]],
+        lat1 = bbox_obj[["ymin"]],
+        lng2 = bbox_obj[["xmax"]],
+        lat2 = bbox_obj[["ymax"]]
+      )
+  }
+})
+
+```
+
+
+## {.sidebar}
+```{r}
+
+# Create hierarchical selectors
+selectInput(
+  "mokupuni",
+  "Select Mokupuni (Island):",
+  choices = c("Choose Island..." = "", hierarchy_data$unique_values$mokupuni),
+  selected = ""
+)
+
+# Reactive moku selector
+uiOutput("moku_selector")
+
+# Reactive ahupua'a selector
+uiOutput("ahupuaa_selector")
+
+# Display current selection info
+uiOutput("selection_info")
+
+# Reset button
+br()
+actionButton(
+  "reset_selection",
+  "Reset Selection",
+  class = "btn-outline-secondary btn-sm"
+)
+```
+
+
+
+## Column {width=70%}
+
+
+```{r}
+leafletOutput("main_map")
+
+```
