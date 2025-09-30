@@ -1,0 +1,66 @@
+---
+title: "PROCESS -- Creating the Ahupua'a Dashboard"
+
+---
+
+# Creating the Ahupua‘a Dashboard 
+
+1. Data Sourcing & Setup
+
+* Search for relevant datasets on opendata.hawaii.gov.
+* Found ahupuaa geospatial dataset.
+* Used R (with help from Claude AI & ChatGPT) to display polygons on a map.
+
+2. Adding Layers
+
+* Iterative process:
+* Find a relevant dataset.
+* Display it on the map as a new layer with toggle control.
+* Test combinations of new + existing layers.
+* Adjust usability issues (overlap, colors, density).
+
+3. Data Processing
+
+* Challenges with polygons: require careful coloring and border handling.
+* Processing steps for ahupuaa dataset:
+* Merge duplicate polygons (non-contiguous ahupuaa).
+* Extract hierarchy (mokupuni → moku → ahupuaa) for UI.
+* Processing new datasets may include:
+* Cleaning duplicates.
+* Pre-processing data for better performance.
+* Deriving new datasets from interactions with borders.
+
+4. Project Maturation (could be done asynchronously)
+
+* Looked for quality-of-life improvements: code formatting, linting.
+* Migrated from R Markdown → Quarto ecosystem for:
+* Multi-language support (R, Python, Jupyter).
+* Dashboard creation with R Shiny integration.
+* Output options (e.g., PDF reports based on user parameters).
+
+# Generalized Process
+
+1. Data Discovery & Setup
+
+* Identify sources of relevant datasets.
+* Select one or more foundational datasets.
+* Set up a basic visualization or prototype using your chosen tools/languages.
+
+2. Iterative Development Cycle
+
+* Search for new datasets or inputs.
+* Add the dataset to the project as a new component/layer/module.
+* Test the interaction of the new data with existing ones.
+* Refine display, usability, and integration issues (e.g., color, density, overlap, performance).
+
+3. Data Processing & Preparation
+
+* Clean and preprocess data (remove duplicates, fix inconsistencies).
+* Transform data into usable formats (e.g., merge shapes, extract hierarchies, derive new metrics).
+* Decide between client-side vs. pre-processed (server-side or bulk) data handling for performance.
+
+4. Project Maturation (could be done asynchronously)
+
+* Adopt quality-of-life improvements (linting, formatting, automation).
+* Transition from simple prototypes to more robust frameworks (e.g., from notebooks → dashboard systems).
+* Expand outputs (reports, exports, APIs, interactive dashboards).
