@@ -11,7 +11,17 @@ preview:
 ```{r}
 #| context: setup
 
-packages <- c("shiny", "jsonlite", "leaflet", "DT", "sf", "dplyr", "purrr")
+packages <- c(
+  "shiny",
+  "jsonlite",
+  "leaflet",
+  "DT",
+  "sf",
+  "dplyr",
+  "purrr",
+  "RColorBrewer",
+  "stringr"
+)
 
 install_if_missing <- function(pkg) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -63,6 +73,10 @@ threatened_endangered_plants_data <- st_read(
   "raw_data/Threatened-Endangered_Plants.geojson",
   quiet = TRUE
 )
+# raw_carbon_data <- st_read(
+#   "raw_data/Carbon_Assessment_of_Hawaii_-_Land_Cover_-_Biome_Unit.geojson",
+#   quiet = TRUE
+# )
 
 ```
 
@@ -580,6 +594,120 @@ observe({
   }
 })
 
+
+carbon_overlay_visible <- reactiveVal(FALSE)
+
+output$carbon_toggle_button <- renderUI({
+  if (input$mokupuni == "" || input$moku == "" || input$ahupuaa == "") {
+    return(NULL)
+  }
+  actionButton(
+    "toggle_carbon",
+    "Show Carbon Assessment Overlay"
+  )
+})
+
+observeEvent(input$toggle_carbon, {
+  if (!carbon_overlay_visible()) {
+    updateActionButton(
+      session,
+      "toggle_carbon",
+      label = "Hide Carbon Assessment Overlay"
+    )
+    leafletProxy("main_map") %>%
+      clearGroup("Carbon Data")
+    req(input$mokupuni)
+    req(input$moku)
+    req(input$ahupuaa)
+    # replace escaped/encoded characters
+    ahupuaa_name <- gsub("_N-A", "_N/A", input$ahupuaa)
+    ahupuaa_name <- gsub(" ", "_", input$ahupuaa)
+
+    ahupuaa_carbon_data <- st_read(
+      str_glue(
+        "processed_data/ahupuaa_data/carbon_polygons_{input$mokupuni}_{input$moku}_{ahupuaa_name}.geojson"
+      ),
+      quiet = TRUE
+    )
+    ahupuaa_carbon_data <- ahupuaa_carbon_data %>%
+      st_collection_extract("POLYGON") %>%
+      filter(st_is_valid(.))
+
+    carbon_palette <- colorFactor(
+      palette = colorRampPalette(brewer.pal(12, "Paired"))(48),
+      domain = unique(ahupuaa_carbon_data$detailed_lc_unit) # the text column
+    )
+
+    ahupuaa_carbon_area_summary <- ahupuaa_carbon_data %>%
+      mutate(
+        area_m2 = as.numeric(st_area(.)),
+        area_km2 = area_m2 / 1000000,
+        area_acres = area_m2 * 0.000247105
+      ) %>%
+      st_drop_geometry() %>%
+      group_by(detailed_lc_unit) %>%
+      summarise(
+        polygon_count = n(),
+        total_area_acres = sum(area_acres),
+        avg_area_km2 = mean(area_km2),
+        min_area_km2 = min(area_km2),
+        max_area_km2 = max(area_km2)
+      ) %>%
+      arrange(desc(total_area_acres))
+    print(ahupuaa_carbon_area_summary)
+
+    output$table <-
+      renderDataTable({
+        datatable(ahupuaa_carbon_area_summary) %>%
+          formatRound(
+            columns = c(
+              "total_area_acres",
+              "avg_area_km2",
+              "min_area_km2",
+              "max_area_km2"
+            ),
+            digits = 2
+          )
+      })
+
+    leafletProxy("main_map") %>%
+      addPolygons(
+        data = ahupuaa_carbon_data,
+        group = "Carbon Data",
+        fillColor = ~ carbon_palette(detailed_lc_unit),
+        color = "black",
+        weight = 1,
+        fillOpacity = 0.7,
+        popup = ~ paste0(
+          "<p><strong>Detailed LC:</strong> ",
+          detailed_lc_unit,
+          "</p>",
+          "<p><strong>General LC:</strong> ",
+          general_lc_unit,
+          "</p>",
+          "<p><strong>Biome Unit:</strong> ",
+          biome_unit,
+          "</p>",
+          "<p><strong>Moisture:</strong> ",
+          moisture_zone,
+          "</p>",
+          "<p><strong>Habitat:</strong> ",
+          habitat_status,
+          "</p>"
+        )
+      )
+  } else {
+    leafletProxy("main_map") %>%
+      clearGroup("Carbon Data")
+    updateActionButton(
+      session,
+      "toggle_carbon",
+      label = "Show Carbon Assessment Overlay"
+    )
+  }
+  carbon_overlay_visible(!carbon_overlay_visible())
+})
+
 ```
 
 
@@ -610,14 +738,26 @@ actionButton(
   "Reset Selection",
   class = "btn-outline-secondary btn-sm"
 )
+
+# Toggle Carbon Assessment Overlay
+br()
+uiOutput("carbon_toggle_button")
+
 ```
 
 
 
 ## Column {width=70%}
 
+### Map View {height = 70%}
 
 ```{r}
 leafletOutput("main_map")
+
+```
+
+### Data Summary {height = 30%}
+```{r}
+dataTableOutput("table")
 
 ```
