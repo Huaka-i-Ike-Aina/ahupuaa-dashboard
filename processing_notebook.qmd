@@ -19,6 +19,15 @@ invisible(lapply(packages, library, character.only = TRUE))
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
+```{r setup-folders, include=FALSE}
+dir.create("processed_data", showWarnings = FALSE)
+dir.create("processed_data/mokupuni_data", showWarnings = FALSE)
+dir.create("processed_data/moku_data", showWarnings = FALSE)
+dir.create("processed_data/ahupuaa_data", showWarnings = FALSE)
+
+```
+
+
 ```{r ahupuaa-merge-processing}
 raw_ahupuaa_data <- st_read("raw_data/Ahupuaa.geojson")
 
