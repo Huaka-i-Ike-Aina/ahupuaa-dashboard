@@ -5,11 +5,11 @@ format: html
 
 ```{r setup-install, include=FALSE}
 
-packages <- c("leaflet", "sf", "dplyr", "knitr")
+packages <- c("leaflet", "sf", "dplyr", "knitr", "jsonlite", "purrr")
 
 install_if_missing <- function(pkg) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg)
+    install.packages(pkg, repos='http://cran.us.r-project.org')
   }
 }
 
@@ -19,6 +19,15 @@ invisible(lapply(packages, library, character.only = TRUE))
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
+```{r setup-folders, include=FALSE}
+dir.create("processed_data", showWarnings = FALSE)
+dir.create("processed_data/mokupuni_data", showWarnings = FALSE)
+dir.create("processed_data/moku_data", showWarnings = FALSE)
+dir.create("processed_data/ahupuaa_data", showWarnings = FALSE)
+
+```
+
+
 ```{r ahupuaa-merge-processing}
 raw_ahupuaa_data <- st_read("raw_data/Ahupuaa.geojson")
 
@@ -27,7 +36,11 @@ merged_polygons <- raw_ahupuaa_data %>%
   summarise(geometry = st_union(geometry), .groups = 'drop')
 
 
-st_write(merged_polygons, "processed_data/merged_ahupuaa.geojson")
+st_write(
+  merged_polygons,
+  "processed_data/merged_ahupuaa.geojson",
+  delete_dsn = TRUE
+)
 
 
 merged_originals <- raw_ahupuaa_data %>%
@@ -35,7 +48,11 @@ merged_originals <- raw_ahupuaa_data %>%
   filter(n() > 1) %>% # only keep groups with multiple polygons
   ungroup()
 
-st_write(merged_originals, "processed_data/merged_originals.geojson")
+st_write(
+  merged_originals,
+  "processed_data/merged_originals.geojson",
+  delete_dsn = TRUE
+)
 
 ```
 
@@ -308,6 +325,178 @@ merged_mokupuni <- raw_ahupuaa_data %>%
   summarise(geometry = st_union(geometry), .groups = 'drop')
 
 
-st_write(merged_mokupuni, "processed_data/merged_mokupuni.geojson")
+merged_mokupuni_ridge_to_reef <- raw_moku_data %>%
+  group_by(mokupuni) %>% # add all columns you want to match
+  summarise(geometry = st_union(geometry), .groups = 'drop')
 
+st_write(
+  merged_mokupuni,
+  "processed_data/merged_mokupuni.geojson",
+  delete_dsn = TRUE
+)
+
+st_write(
+  merged_mokupuni_ridge_to_reef,
+  "processed_data/merged_mokupuni_ridge_to_reef.geojson",
+  delete_dsn = TRUE
+)
+
+```
+
+
+```{r carbon-assessment-counts}
+
+raw_carbon_data <- st_read(
+  "raw_data/Carbon_Assessment_of_Hawaii_-_Land_Cover_-_Biome_Unit.geojson"
+)
+# Create a summary of unique values per column
+library(purrr)
+
+unique_counts <- raw_carbon_data %>%
+  st_drop_geometry() %>%
+  select(where(is.character)) %>%
+  map(
+    ~ as.data.frame(table(.x)) %>%
+      arrange(desc(Freq))
+  ) # sorted by frequency
+
+unique_counts
+```
+
+```{r carbon-assessment-merge-mokupuni}
+carbon_polygons <- st_read(
+  "raw_data/Carbon_Assessment_of_Hawaii_-_Land_Cover_-_Biome_Unit.geojson"
+)
+
+merged_mokupuni <- st_read(
+  "processed_data/merged_mokupuni_ridge_to_reef.geojson"
+)
+
+
+# Spatial join to assign each parcel to a district
+polygons_within_mokupuni <- st_join(
+  carbon_polygons,
+  merged_mokupuni,
+  join = st_intersects
+)
+
+# Separate by district
+mokupuni_names <- unique(polygons_within_mokupuni$mokupuni)
+
+
+for (mokupuni_name in mokupuni_names) {
+  if (!is.na(mokupuni_name) && mokupuni_name != "") {
+    mokupuni_polygons <- polygons_within_mokupuni %>%
+      filter(mokupuni == mokupuni_name)
+
+    st_write(
+      mokupuni_polygons,
+      paste0(
+        "processed_data/mokupuni_data/carbon_polygons_",
+        mokupuni_name,
+        ".geojson"
+      ),
+      delete_dsn = TRUE
+    )
+  }
+}
+
+# Parcels not in any district
+polygons_unassigned <- polygons_within_mokupuni %>%
+  filter(is.na(mokupuni))
+
+st_write(
+  polygons_unassigned,
+  "processed_data/mokupuni_data/carbon_polygons_unassigned.geojson",
+  delete_dsn = TRUE
+)
+
+```
+
+```{r carbon-assessment-merge-moku}
+
+moku_data <- st_read("raw_data/Moku_Ridge_To_Reef_(DAR).geojson")
+hierarchy_data <- fromJSON(
+  "processed_data/ahupuaa_hierarchy.json"
+)
+
+ahupuaa_data <- st_read("processed_data/merged_ahupuaa.geojson")
+
+# for each mokupuni, separate by moku
+# need to maintain both mokupuni and moku columns and names to be able to filter properly
+for (mokupuni_name in mokupuni_names) {
+  mokupuni_polygons <- polygons_within_mokupuni %>%
+    filter(mokupuni == mokupuni_name)
+
+  # Spatial join to assign each parcel to a district
+  polygons_within_moku <- st_join(
+    mokupuni_polygons,
+    moku_data,
+    join = st_intersects,
+    suffix = c("", "_moku")
+  )
+  # polygons_within_moku
+
+  moku_names <- unique(polygons_within_moku$moku)
+
+  for (moku_name in moku_names) {
+    if (!is.na(moku_name) && moku_name != "") {
+      moku_polygons <- polygons_within_moku %>%
+        filter(moku == moku_name)
+
+      clipped_moku_polygons <- st_intersection(
+        moku_polygons,
+        moku_data %>% filter(mokupuni == mokupuni_name, moku == moku_name)
+      )
+      st_write(
+        clipped_moku_polygons,
+        paste0(
+          "processed_data/moku_data/carbon_polygons_",
+          gsub(" ", "_", mokupuni_name),
+          "_",
+          gsub(" ", "_", moku_name),
+          ".geojson"
+        ),
+        delete_dsn = TRUE
+      )
+
+      ahupuaa_names <- hierarchy_data$hierarchy[[mokupuni_name]]$moku[[
+        moku_name
+      ]]$ahupuaa
+
+      for (ahupuaa_name in ahupuaa_names) {
+        ahupuaa_polygons <- st_intersection(
+          clipped_moku_polygons,
+          ahupuaa_data %>%
+            filter(
+              mokupuni == mokupuni_name,
+              moku == moku_name,
+              ahupuaa == ahupuaa_name
+            )
+        )
+        print(moku_name)
+        print(ahupuaa_name)
+        if (grepl("/", ahupuaa_name)) {
+          ahupuaa_name <- gsub("/", "-", ahupuaa_name)
+        }
+
+        if (nrow(ahupuaa_polygons) > 0) {
+          st_write(
+            ahupuaa_polygons,
+            paste0(
+              "processed_data/ahupuaa_data/carbon_polygons_",
+              gsub(" ", "_", mokupuni_name),
+              "_",
+              gsub(" ", "_", moku_name),
+              "_",
+              gsub(" ", "_", ahupuaa_name),
+              ".geojson"
+            ),
+            delete_dsn = TRUE
+          )
+        }
+      }
+    }
+  }
+}
 ```
