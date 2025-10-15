@@ -1,0 +1,25 @@
+name: quarto-setup
+
+on:
+  push:
+    branches: main
+
+jobs:
+  quarto-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: quarto-dev/quarto-actions/setup@v2
+      - run: |
+          quarto --version
+  quarto-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: quarto-dev/quarto-actions/setup@v2
+      - run: |
+          quarto --version
+  quarto-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: quarto-dev/quarto-actions/setup@v2
+      - run: |
+          quarto --version
