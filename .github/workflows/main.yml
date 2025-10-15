@@ -17,8 +17,14 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Render Quarto Project
+      - name: Render Processing Notebook
         uses: quarto-dev/quarto-actions/render@v2
+          with:
+            path: processing_notebook.qmd
+      - name: Render Processing Notebook
+        uses: quarto-dev/quarto-actions/render@v2
+          with:
+            path: ahupuaa_dashboard.qmd
       # - name: Render and Publish
       #   uses: quarto-dev/quarto-actions/publish@v2
       #   with:
