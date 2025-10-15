@@ -19,15 +19,10 @@ jobs:
 
       - name: Render Processing Notebook
         uses: quarto-dev/quarto-actions/render@v2
-          with:
-            path: processing_notebook.qmd
-      - name: Render Processing Notebook
+        with:
+          path: processing_notebook.qmd
+            
+      - name: Render Ahupuaa Dashboard
         uses: quarto-dev/quarto-actions/render@v2
-          with:
-            path: ahupuaa_dashboard.qmd
-      # - name: Render and Publish
-      #   uses: quarto-dev/quarto-actions/publish@v2
-      #   with:
-      #     target: gh-pages
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: ahupuaa_dashboard.qmd
