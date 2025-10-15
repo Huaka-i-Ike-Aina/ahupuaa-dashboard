@@ -9,7 +9,7 @@ packages <- c("leaflet", "sf", "dplyr", "knitr", "jsonlite", "purrr")
 
 install_if_missing <- function(pkg) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg)
+    install.packages(pkg, repos='http://cran.us.r-project.org')
   }
 }
 

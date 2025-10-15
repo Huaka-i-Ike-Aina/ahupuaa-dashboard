@@ -25,7 +25,7 @@ packages <- c(
 
 install_if_missing <- function(pkg) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, repos='http://cran.us.r-project.org')
+    install.packages(pkg)
   }
 }
 
@@ -761,3 +761,4 @@ leafletOutput("main_map")
 dataTableOutput("table")
 
 ```
+
