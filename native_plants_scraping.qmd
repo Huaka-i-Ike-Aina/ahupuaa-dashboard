@@ -1,0 +1,583 @@
+---
+title: "Data Processing Notebook"
+format: html
+---
+
+```{r native-plants-scraping}
+# Hawaiian Native Plants Web Scraper
+# This script scrapes plant data from nativeplants.hawaii.edu
+
+# Install required packages if needed
+# install.packages(c("rvest", "dplyr", "tidyr", "xml2"))
+
+library(rvest)
+library(dplyr)
+library(tidyr)
+library(xml2)
+
+# Function to scrape a single plant page
+scrape_plant_data <- function(url) {
+  # Read the HTML page
+  page <- read_html(url)
+
+  # Extract plant name (from the title/header)
+  plant_name <- page %>%
+    html_node("h1, .plant-name") %>%
+    html_text(trim = TRUE)
+
+  # If no h1, try getting from title or first heading
+  if (is.na(plant_name) || plant_name == "") {
+    plant_name <- page %>%
+      html_node("title") %>%
+      html_text(trim = TRUE)
+  }
+
+  # Find all elements with class "subheading"
+  subheading_nodes <- page %>%
+    html_nodes(".subheading")
+
+  # Initialize vectors for subheadings and values
+  subheadings <- c()
+  data_values <- c()
+
+  # Process each subheading
+  for (node in subheading_nodes) {
+    # Get the subheading text
+    subheading_text <- html_text(node, trim = TRUE)
+
+    # Skip if empty
+    if (subheading_text == "") {
+      next
+    }
+
+    # Get all following siblings until we hit another subheading, heading, or backtotop
+    current_node <- xml_find_first(node, "following-sibling::*[1]")
+    collected_text <- c()
+
+    while (!is.na(current_node)) {
+      # Get the class of current node
+      node_class <- xml_attr(current_node, "class")
+
+      # Stop if we hit another subheading, heading, or backtotop
+      if (!is.na(node_class)) {
+        if (grepl("subheading|heading|backtotop", node_class)) {
+          break
+        }
+      }
+
+      # Check if this is a list (ul or ol)
+      node_name <- xml_name(current_node)
+
+      if (node_name %in% c("ul", "ol")) {
+        # Handle list items with delimiters
+        list_items <- xml_find_all(current_node, ".//li")
+        if (length(list_items) > 0) {
+          list_text <- sapply(list_items, function(li) {
+            html_text(li, trim = TRUE)
+          })
+          list_text <- list_text[list_text != ""] # Remove empty items
+          if (length(list_text) > 0) {
+            # Join list items with " | " delimiter
+            collected_text <- c(
+              collected_text,
+              paste(list_text, collapse = " | ")
+            )
+          }
+        }
+      } else {
+        # Get the text content for non-list elements
+        text_content <- html_text(current_node, trim = TRUE)
+
+        # If this is a plantcontent node, check if it's empty
+        if (!is.na(node_class) && grepl("plantcontent", node_class)) {
+          if (text_content != "") {
+            collected_text <- c(collected_text, text_content)
+          }
+        } else {
+          # For non-plantcontent nodes, add if not empty
+          if (text_content != "") {
+            collected_text <- c(collected_text, text_content)
+          }
+        }
+      }
+
+      # Move to next sibling
+      current_node <- xml_find_first(current_node, "following-sibling::*[1]")
+    }
+
+    # Combine all collected text
+    final_value <- paste(collected_text, collapse = " ")
+
+    # Add to our vectors
+    subheadings <- c(subheadings, subheading_text)
+    data_values <- c(data_values, final_value)
+  }
+
+  # Create a named list with the data
+  plant_data <- list(
+    URL = url,
+    Plant_Name = plant_name
+  )
+
+  # Add each subheading-value pair to the list
+  for (i in seq_along(subheadings)) {
+    # Clean up the subheading name for use as column name
+    col_name <- gsub("[^A-Za-z0-9_]", "_", subheadings[i])
+    col_name <- gsub("_+", "_", col_name) # Remove multiple underscores
+    col_name <- gsub("^_|_$", "", col_name) # Remove leading/trailing underscores
+
+    plant_data[[col_name]] <- data_values[i]
+  }
+
+  return(plant_data)
+}
+
+# Function to scrape multiple plant URLs
+scrape_multiple_plants <- function(urls) {
+  # Initialize empty list to store results
+  all_plants <- list()
+
+  # Loop through each URL
+  for (i in seq_along(urls)) {
+    cat(sprintf("Scraping plant %d of %d: %s\n", i, length(urls), urls[i]))
+
+    # Try to scrape, with error handling
+    result <- tryCatch(
+      {
+        scrape_plant_data(urls[i])
+      },
+      error = function(e) {
+        cat(sprintf("Error scraping %s: %s\n", urls[i], e$message))
+        return(NULL)
+      }
+    )
+
+    if (!is.null(result)) {
+      all_plants[[i]] <- result
+    }
+
+    # Be polite - add a small delay between requests
+    Sys.sleep(1)
+  }
+
+  # Convert list to data frame
+  # Use bind_rows which handles missing columns gracefully
+  df <- bind_rows(all_plants)
+
+  return(df)
+}
+
+# Function to get all plant URLs from the index pages
+get_all_plant_urls <- function(
+  base_url = "http://nativeplants.hawaii.edu/plant/index/page/",
+  total_pages = 24
+) {
+  all_urls <- c()
+
+  # Loop through each index page
+  for (page_num in 1:total_pages) {
+    page_url <- paste0(base_url, page_num, "/")
+    cat(sprintf(
+      "Scraping index page %d of %d: %s\n",
+      page_num,
+      total_pages,
+      page_url
+    ))
+
+    # Try to get the page with error handling
+    tryCatch(
+      {
+        page <- read_html(page_url)
+
+        # Find all <a> tags with "View Profile" text
+        profile_links <- page %>%
+          html_nodes("a") %>%
+          keep(~ html_text(.x, trim = TRUE) == "View Profile") %>%
+          html_attr("href")
+
+        # Convert relative URLs to absolute URLs if needed
+        profile_links <- sapply(profile_links, function(link) {
+          if (!grepl("^http", link)) {
+            # Add base domain if it's a relative URL
+            link <- paste0("http://nativeplants.hawaii.edu", link)
+          }
+          return(link)
+        })
+
+        all_urls <- c(all_urls, profile_links)
+        cat(sprintf(
+          "  Found %d plant profiles on this page\n",
+          length(profile_links)
+        ))
+      },
+      error = function(e) {
+        cat(sprintf("Error scraping index page %d: %s\n", page_num, e$message))
+      }
+    )
+
+    # Be polite - small delay between index page requests
+    Sys.sleep(1)
+  }
+
+  cat(sprintf("\nTotal plant profiles found: %d\n\n", length(all_urls)))
+  return(unique(all_urls)) # Remove any duplicates
+}
+
+# ==============================================================================
+# MAIN EXECUTION - Scrape the entire database
+# ==============================================================================
+
+cat(strrep("=", 78), "\n")
+cat("Hawaiian Native Plants Database - Full Scraper\n")
+cat(strrep("=", 78), "\n\n")
+
+# Step 1: Get all plant URLs from the index pages
+cat("STEP 1: Collecting all plant profile URLs...\n")
+cat(strrep("-", 78), "\n")
+plant_urls <- get_all_plant_urls(total_pages = 24)
+
+# Step 2: Scrape all plant pages
+cat("\nSTEP 2: Scraping individual plant profiles...\n")
+cat(strrep("-", 78), "\n")
+all_plant_data <- scrape_multiple_plants(plant_urls)
+
+# Step 3: Save results
+cat("\nSTEP 3: Saving results...\n")
+cat(strrep("-", 78), "\n")
+output_file <- "scraped_data/hawaii_native_plants_complete.csv"
+write.csv(all_plant_data, output_file, row.names = FALSE)
+cat(sprintf("Data saved to: %s\n", output_file))
+cat(sprintf("Total plants scraped: %d\n", nrow(all_plant_data)))
+cat(sprintf("Total columns: %d\n", ncol(all_plant_data)))
+
+# Display summary
+cat("\n", strrep("=", 78), "\n")
+cat("SCRAPING COMPLETE!\n")
+cat(strrep("=", 78), "\n\n")
+cat("Columns collected:\n")
+print(colnames(all_plant_data))
+
+# ==============================================================================
+# OPTIONAL: Example usage for testing with single plant or small sample
+# ==============================================================================
+
+# Uncomment below to test with a single plant first:
+# single_url <- "http://nativeplants.hawaii.edu/plant/view/Abutilon_eremitopetalum/"
+# plant_data <- scrape_plant_data(single_url)
+# print(plant_data)
+
+# Uncomment below to test with a small sample:
+# sample_urls <- plant_urls[1:5]  # First 5 plants
+# sample_data <- scrape_multiple_plants(sample_urls)
+# print(sample_data)
+```
+
+```{r native-plant-sorting}
+# Plant to Biome Matching Algorithm
+# Matches plants to Hawaiian biomes based on habitat descriptions
+
+library(dplyr)
+library(stringr)
+
+# Function to match a single plant to biomes
+match_plant_to_biomes <- function(habitat_text) {
+  # Return empty if no habitat information
+  if (is.na(habitat_text) || habitat_text == "") {
+    return(character(0))
+  }
+
+  # Convert to lowercase for case-insensitive matching
+  text_lower <- tolower(habitat_text)
+
+  # Initialize vector to store matched biomes
+  matched_biomes <- c()
+
+  # Define biome matching patterns
+  # Each pattern is a list of keywords that indicate that biome
+
+  # Moisture regimes
+  is_wet <- grepl(
+    "wet forest|rain forest|rainforest|wet vegetation|mesic forest",
+    text_lower
+  )
+  is_mesic <- grepl(
+    "mesic forest|mesic shrubland|mesic grassland|mesic vegetation|mesic",
+    text_lower
+  )
+  is_dry <- grepl(
+    "dry forest|dry shrubland|dry grassland|dry vegetation|arid|xeric",
+    text_lower
+  )
+
+  # Vegetation structure types
+  has_forest <- grepl("forest", text_lower)
+  has_shrubland <- grepl("shrubland|shrub", text_lower)
+  has_grassland <- grepl("grassland|grass", text_lower)
+  has_wetland <- grepl("wetland|marsh|bog|swamp", text_lower)
+  has_coastal <- grepl("coastal|strand|beach|dune|littoral", text_lower)
+
+  # Match specific biomes by combining moisture + structure
+
+  # Forest biomes
+  if (has_forest) {
+    if (is_wet) {
+      matched_biomes <- c(matched_biomes, "Wet Forest")
+    }
+    if (is_mesic) {
+      matched_biomes <- c(matched_biomes, "Mesic Forest")
+    }
+    if (is_dry) {
+      matched_biomes <- c(matched_biomes, "Dry Forest")
+    }
+    # If forest mentioned but no moisture regime specified, try to infer
+    if (!is_wet && !is_mesic && !is_dry) {
+      # Check for general indicators
+      if (grepl("lowland|leeward", text_lower)) {
+        matched_biomes <- c(matched_biomes, "Dry Forest")
+      } else if (grepl("windward|mountain|upland", text_lower)) {
+        matched_biomes <- c(matched_biomes, "Wet Forest")
+      }
+    }
+  }
+
+  # Shrubland biomes
+  if (has_shrubland) {
+    if (is_wet) {
+      matched_biomes <- c(matched_biomes, "Wet Shrubland")
+    }
+    if (is_mesic) {
+      matched_biomes <- c(matched_biomes, "Mesic Shrubland")
+    }
+    if (is_dry) {
+      matched_biomes <- c(matched_biomes, "Dry Shrubland")
+    }
+    if (!is_wet && !is_mesic && !is_dry) {
+      if (grepl("lowland|leeward", text_lower)) {
+        matched_biomes <- c(matched_biomes, "Dry Shrubland")
+      }
+    }
+  }
+
+  # Grassland biomes
+  if (has_grassland) {
+    if (is_wet) {
+      matched_biomes <- c(matched_biomes, "Wet Grassland")
+    }
+    if (is_mesic) {
+      matched_biomes <- c(matched_biomes, "Mesic Grassland")
+    }
+    if (is_dry) {
+      matched_biomes <- c(matched_biomes, "Dry Grassland")
+    }
+    if (!is_wet && !is_mesic && !is_dry) {
+      if (grepl("lowland|leeward", text_lower)) {
+        matched_biomes <- c(matched_biomes, "Dry Grassland")
+      }
+    }
+  }
+
+  # Special biomes
+  if (has_wetland) {
+    matched_biomes <- c(matched_biomes, "Wetland")
+  }
+
+  if (has_coastal) {
+    matched_biomes <- c(matched_biomes, "Coastal Strand")
+  }
+
+  # Remove duplicates and return
+  return(unique(matched_biomes))
+}
+
+# Function to process entire dataset
+add_biome_matches <- function(
+  plant_data,
+  habitat_column = "Additional_Habitat_Information"
+) {
+  # Clean plant names - remove "Native Plants Hawaii - Viewing Plant : " prefix
+  if ("Plant_Name" %in% names(plant_data)) {
+    plant_data$Plant_Name <- gsub(
+      "^Native Plants Hawaii - Viewing Plant : ",
+      "",
+      plant_data$Plant_Name
+    )
+    plant_data$Plant_Name <- gsub(
+      "^Native Plants Hawaii - Viewing Plant",
+      "",
+      plant_data$Plant_Name
+    )
+    plant_data$Plant_Name <- trimws(plant_data$Plant_Name)
+  }
+
+  # Apply matching function to each plant
+  plant_data$Matched_Biomes <- sapply(
+    plant_data[[habitat_column]],
+    function(habitat) {
+      biomes <- match_plant_to_biomes(habitat)
+      if (length(biomes) == 0) {
+        return(NA)
+      } else {
+        # Join multiple biomes with " | " delimiter
+        return(paste(biomes, collapse = " | "))
+      }
+    }
+  )
+
+  # Add count of matched biomes
+  plant_data$Biome_Count <- sapply(plant_data$Matched_Biomes, function(x) {
+    if (is.na(x)) {
+      return(0)
+    }
+    return(length(strsplit(x, " \\| ")[[1]]))
+  })
+
+  return(plant_data)
+}
+
+# Function to create a biome summary report
+create_biome_summary <- function(plant_data) {
+  # Extract all individual biome matches
+  all_biomes <- unlist(strsplit(
+    plant_data$Matched_Biomes[!is.na(plant_data$Matched_Biomes)],
+    " \\| "
+  ))
+
+  # Count frequency of each biome
+  biome_counts <- as.data.frame(table(all_biomes))
+  names(biome_counts) <- c("Biome", "Plant_Count")
+  biome_counts <- biome_counts %>% arrange(desc(Plant_Count))
+
+  # Calculate plants without matches
+  no_match_count <- sum(is.na(plant_data$Matched_Biomes))
+
+  # Print summary
+  cat("\n=== BIOME MATCHING SUMMARY ===\n\n")
+  cat(sprintf("Total plants analyzed: %d\n", nrow(plant_data)))
+  cat(sprintf(
+    "Plants with biome matches: %d\n",
+    nrow(plant_data) - no_match_count
+  ))
+  cat(sprintf("Plants without matches: %d\n\n", no_match_count))
+
+  cat("Biome Distribution:\n")
+  print(biome_counts)
+
+  return(biome_counts)
+}
+
+# Function to filter plants by specific biome(s)
+filter_by_biome <- function(plant_data, biomes) {
+  # Create regex pattern for matching
+  pattern <- paste(biomes, collapse = "|")
+
+  # Filter plants that match any of the specified biomes
+  filtered <- plant_data %>%
+    filter(grepl(pattern, Matched_Biomes, ignore.case = TRUE))
+
+  return(filtered)
+}
+
+# Function to create plant list with biomes (wide format - one row per plant)
+create_plant_biome_list <- function(
+  plant_data,
+  output_file = "scraped_data/plant_biome_list.csv"
+) {
+  # Select relevant columns and create clean output
+  plant_list <- data.frame(
+    Plant_Name = plant_data$Plant_Name,
+    URL = if ("URL" %in% names(plant_data)) plant_data$URL else NA,
+    Biomes = ifelse(
+      is.na(plant_data$Matched_Biomes),
+      "",
+      plant_data$Matched_Biomes
+    ),
+    Biome_Count = plant_data$Biome_Count,
+    stringsAsFactors = FALSE
+  )
+
+  # Save to CSV
+  write.csv(plant_list, output_file, row.names = FALSE)
+
+  # Calculate statistics
+  plants_with_no_match <- sum(plant_list$Biome_Count == 0)
+  plants_with_matches <- sum(plant_list$Biome_Count > 0)
+  plants_with_multiple <- sum(plant_list$Biome_Count > 1)
+
+  cat(sprintf("\nPlant-Biome list saved to: %s\n", output_file))
+  cat(sprintf("Total plants: %d\n", nrow(plant_list)))
+  cat(sprintf("  - Plants with 0 biomes: %d\n", plants_with_no_match))
+  cat(sprintf("  - Plants with 1+ biomes: %d\n", plants_with_matches))
+  cat(sprintf("  - Plants with multiple biomes: %d\n", plants_with_multiple))
+
+  # Show biome count distribution
+  cat("\nBiome count distribution:\n")
+  print(table(plant_list$Biome_Count))
+
+  return(plant_list)
+}
+
+# ==============================================================================
+# EXAMPLE USAGE
+# ==============================================================================
+
+# Assume you have loaded your scraped data into 'plant_data'
+plant_data <- read.csv(
+  "hawaii_native_plants_complete.csv",
+  stringsAsFactors = FALSE
+)
+
+# For demonstration, create sample data from your examples
+# plant_data <- data.frame(
+#   Plant_Name = c(
+#     "Abutilon eremitopetalum",
+#     "Abutilon incanum",
+#     "Abutilon menziesii",
+#     "Abutilon sandwicense"
+#   ),
+#   Additional_Habitat_Information = c(
+#     "This extremely rare and endangered abutilon is only from dry forests at 690 to 1710 feet in eastern Lānaʻi",
+#     "In Hawaiʻi it is questionably indigenous and found mainly on leeward sides in shrublands, grasslands, and dry forests on all the main islands",
+#     "Locally uncommon to rare in dry forests. Some of the largest natural populations occur on the island of Lānaʻi.",
+#     "An Oʻahu endemic found on steep slopes in dry forest from about 985 to 1970 feet in the Waiʻanae Mountains"
+#   ),
+#   stringsAsFactors = FALSE
+# )
+
+# Add biome matches
+plant_data_with_biomes <- add_biome_matches(plant_data)
+
+# View results
+cat("\n=== PLANT-BIOME MATCHES ===\n")
+print(plant_data_with_biomes[, c(
+  "Plant_Name",
+  "Matched_Biomes",
+  "Biome_Count"
+)])
+
+# Create summary report
+biome_summary <- create_biome_summary(plant_data_with_biomes)
+
+# Example: Filter for plants in Dry Forest
+cat("\n\n=== PLANTS IN DRY FOREST ===\n")
+dry_forest_plants <- filter_by_biome(plant_data_with_biomes, "Dry Forest")
+print(dry_forest_plants$Plant_Name)
+
+# Example: Filter for plants in multiple biomes
+cat("\n\n=== PLANTS IN DRY SHRUBLAND OR DRY GRASSLAND ===\n")
+dry_open_plants <- filter_by_biome(
+  plant_data_with_biomes,
+  c("Dry Shrubland", "Dry Grassland")
+)
+print(dry_open_plants$Plant_Name)
+
+# Create and save the plant list (one row per plant with biomes listed)
+cat("\n\n=== CREATING PLANT-BIOME LIST ===\n")
+plant_list <- create_plant_biome_list(plant_data_with_biomes)
+
+# Preview the plant list
+cat("\n=== PREVIEW OF PLANT LIST ===\n")
+print(plant_list)
+
+# Save main results to CSV
+# write.csv(plant_data_with_biomes, "plants_with_biome_matches.csv", row.names = FALSE)
+```
