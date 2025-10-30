@@ -99,7 +99,7 @@ grid-auto-rows: minmax(0, 1fr);">
 <div class="card cell bslib-card html-fill-container html-fill-item" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
 <div class="card-body html-fill-item html-fill-container">
 <div class="cell-output-display html-fill-item html-fill-container">
-<div class="datatables html-widget html-widget-output shiny-report-size html-fill-item html-fill-container" id="table" style="width:100%;height:auto;"></div>
+<div class="datatables html-widget html-widget-output shiny-report-size html-fill-item html-fill-container" id="plant_table" style="width:100%;height:auto;"></div>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -115,7 +115,7 @@ grid-auto-rows: minmax(0, 1fr);">
 <div class="card cell bslib-card html-fill-container html-fill-item" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
 <div class="card-body html-fill-item html-fill-container">
 <div class="cell-output-display html-fill-item html-fill-container">
-<div class="datatables html-widget html-widget-output shiny-report-size html-fill-item html-fill-container" id="plant_table" style="width:100%;height:auto;"></div>
+<div class="datatables html-widget html-widget-output shiny-report-size html-fill-item html-fill-container" id="table" style="width:100%;height:auto;"></div>
 </div>
 </div>
 <bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
@@ -858,7 +858,6 @@ observeEvent(input$toggle_carbon, {
       st_drop_geometry() %>%
       group_by(biome_unit) %>%
       summarise(
-        polygon_count = n(),
         total_area_acres = sum(area_acres),
         avg_area_km2 = mean(area_km2),
         min_area_km2 = min(area_km2),

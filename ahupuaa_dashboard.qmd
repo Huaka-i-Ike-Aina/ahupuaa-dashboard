@@ -691,7 +691,6 @@ observeEvent(input$toggle_carbon, {
       st_drop_geometry() %>%
       group_by(biome_unit) %>%
       summarise(
-        polygon_count = n(),
         total_area_acres = sum(area_acres),
         avg_area_km2 = mean(area_km2),
         min_area_km2 = min(area_km2),
@@ -900,8 +899,8 @@ leafletOutput("main_map")
 
 ### Data Summary {height = 30%}
 ```{r}
-dataTableOutput("table")
 
+dataTableOutput("plant_table")
 ```
 
 
@@ -909,5 +908,5 @@ dataTableOutput("table")
 
 ### Plant view {height = 100%}
 ```{r}
-dataTableOutput("plant_table")
+dataTableOutput("table")
 ```
