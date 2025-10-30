@@ -243,8 +243,6 @@ output$main_map <- renderLeaflet({
   map <- leaflet() %>%
     addTiles() %>%
     addTiles(group = "OpenStreetMap") %>%
-    addProviderTiles("CartoDB.Positron", group = "CartoDB Light") %>%
-    addProviderTiles("CartoDB.DarkMatter", group = "CartoDB Dark") %>%
     addProviderTiles("Esri.WorldImagery", group = "Satellite") %>%
     addProviderTiles("Esri.WorldTopoMap", group = "Topographic") %>%
     setView(lng = -157.8583, lat = 20.9078, zoom = 7)
@@ -518,8 +516,6 @@ output$main_map <- renderLeaflet({
     addLayersControl(
       baseGroups = c(
         "OpenStreetMap",
-        "CartoDB Light",
-        "CartoDB Dark",
         "Satellite",
         "Topographic"
       ),
@@ -530,7 +526,6 @@ output$main_map <- renderLeaflet({
         "Annual Rainfall (in)",
         "Ag Use 2015",
         "Ag Use 2020",
-        "Marine Areas",
         "Threatened/Endangered Plants"
       ), #, "Marine Areas", "Threatened/Endangered Plants"
       options = layersControlOptions(collapsed = FALSE)
@@ -758,6 +753,36 @@ observeEvent(input$toggle_carbon, {
             )
           )
 
+        # Function to truncate and add expand functionality
+        truncate_text <- function(text, max_chars = 150, id_prefix = "text") {
+          if (is.na(text) || text == "" || nchar(text) <= max_chars) {
+            return(text)
+          }
+
+          # Create unique ID for this text
+          text_id <- paste0(
+            id_prefix,
+            "_",
+            abs(as.integer(charToRaw(paste(text, collapse = ""))[1]))
+          )
+
+          # Truncate text
+          short_text <- substr(text, 1, max_chars)
+
+          # Create expandable HTML
+          sprintf(
+            '<span id="%s_short">%s... <a href="#" onclick="document.getElementById(\'%s_short\').style.display=\'none\'; document.getElementById(\'%s_full\').style.display=\'inline\'; return false;" style="color: #0066cc; text-decoration: underline;">Read more</a></span><span id="%s_full" style="display:none;">%s <a href="#" onclick="document.getElementById(\'%s_short\').style.display=\'inline\'; document.getElementById(\'%s_full\').style.display=\'none\'; return false;" style="color: #0066cc; text-decoration: underline;">Read less</a></span>',
+            text_id,
+            short_text,
+            text_id,
+            text_id,
+            text_id,
+            text,
+            text_id,
+            text_id
+          )
+        }
+
         # Join with full plant data and create display table
         plant_table <- ranked_plants %>%
           left_join(
@@ -769,44 +794,87 @@ observeEvent(input$toggle_carbon, {
           arrange(desc(max_biome_area), Plant_Name) %>%
           # Choose which columns to display
           select(
-            Common_Names,
+            Hawaiian_Names,
             Plant_Name,
             Biomes,
             primary_biome,
             max_biome_area,
+            Natural_Range,
             Plant_Form_Growth_Habit,
+            Landscape_Uses,
             Flower_Colors,
             Water_Requirements,
             Light_Conditions,
-            Natural_Range,
-            URL_biome # Use the biome URL
+            Early_Hawaiian_Use,
+            Modern_Use,
+            URL_biome
           ) %>%
-          # Make URLs clickable and format area
+          # Strip delimiters and format
           mutate(
-            max_biome_area = round(max_biome_area, 1),
+            across(
+              c(
+                Hawaiian_Names,
+                Biomes,
+                primary_biome,
+                Plant_Form_Growth_Habit,
+                Flower_Colors,
+                Water_Requirements,
+                Light_Conditions,
+                Landscape_Uses,
+                Natural_Range
+              ),
+              ~ gsub(" \\| ", ", ", .x)
+            ),
+            max_biome_area = round(max_biome_area, 1)
+          ) %>%
+          # Truncate long text fields
+          rowwise() %>%
+          mutate(
+            Early_Hawaiian_Use = truncate_text(
+              Early_Hawaiian_Use,
+              max_chars = 150,
+              id_prefix = paste0("early_use_", row_number())
+            ),
+            Modern_Use = truncate_text(
+              Modern_Use,
+              max_chars = 150,
+              id_prefix = paste0("modern_use_", row_number())
+            )
+          ) %>%
+          ungroup() %>%
+          # Make URLs clickable
+          mutate(
             URL = sprintf('<a href="%s" target="_blank">View</a>', URL_biome)
           ) %>%
-          select(-URL_biome) # Remove the original URL column
+          select(-URL_biome)
 
         plant_table
       },
       options = list(
         pageLength = 25,
         lengthMenu = c(10, 25, 50, 100),
-        scrollX = TRUE
+        scrollX = TRUE,
+        autoWidth = TRUE,
+        columnDefs = list(
+          list(targets = c(12, 13), width = '300px'),
+          list(targets = '_all', className = 'dt-left dt-top')
+        )
       ),
       escape = FALSE,
       colnames = c(
-        "Common Names",
+        "Hawaiian Names",
         "Scientific Name",
         "All Biomes",
         "Primary Biome",
         "Area (acres)",
+        "Islands",
         "Growth Habit",
+        "Landscape Uses",
         "Flower Colors",
         "Water",
         "Light",
-        "Islands",
+        "Early Hawaiian Use",
+        "Modern Use",
         "Profile"
       )
     )
@@ -888,7 +956,7 @@ uiOutput("carbon_toggle_button")
 
 
 
-## Column {width=50%}
+## Column {width=70%}
 
 ### Map View {height = 70%}
 
@@ -897,16 +965,16 @@ leafletOutput("main_map")
 
 ```
 
-### Data Summary {height = 30%}
+### Row {.tabset}
+
+#### Native plants matching biomes
 ```{r}
 
 dataTableOutput("plant_table")
 ```
 
 
-## Column {width=20%}
-
-### Plant view {height = 100%}
+#### Biome Area Summary
 ```{r}
 dataTableOutput("table")
 ```
