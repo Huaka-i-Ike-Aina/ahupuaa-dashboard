@@ -25,7 +25,7 @@ packages <- c(
 
 install_if_missing <- function(pkg) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, repos='http://cran.us.r-project.org')
+    install.packages(pkg, repos = 'http://cran.us.r-project.org')
   }
 }
 
@@ -77,6 +77,29 @@ threatened_endangered_plants_data <- st_read(
 #   "raw_data/Carbon_Assessment_of_Hawaii_-_Land_Cover_-_Biome_Unit.geojson",
 #   quiet = TRUE
 # )
+
+plant_biome_data <- read.csv(
+  "scraped_data/plant_biome_list.csv",
+  stringsAsFactors = FALSE
+)
+
+full_plant_data <- read.csv(
+  "scraped_data/hawaii_native_plants_complete.csv",
+  stringsAsFactors = FALSE
+)
+
+full_plant_data$Plant_Name <- gsub(
+  "^Native Plants Hawaii - Viewing Plant : ",
+  "",
+  full_plant_data$Plant_Name
+)
+full_plant_data$Plant_Name <- gsub(
+  "^Native Plants Hawaii - Viewing Plant",
+  "",
+  full_plant_data$Plant_Name
+)
+full_plant_data$Plant_Name <- trimws(full_plant_data$Plant_Name)
+
 
 ```
 
@@ -607,6 +630,27 @@ output$carbon_toggle_button <- renderUI({
   )
 })
 
+# Function to get plants for specific biomes
+get_plants_for_biomes <- function(biome_list, plant_data) {
+  # Remove any NA or empty biomes
+  biome_list <- biome_list[!is.na(biome_list) & biome_list != ""]
+
+  if (length(biome_list) == 0) {
+    return(character(0))
+  }
+
+  # Create regex pattern to match any of the biomes
+  pattern <- paste(biome_list, collapse = "|")
+
+  # Filter plants that have any of these biomes
+  matching_plants <- plant_data %>%
+    filter(grepl(pattern, Biomes, fixed = FALSE)) %>%
+    pull(Plant_Name) %>%
+    unique()
+
+  return(matching_plants)
+}
+
 observeEvent(input$toggle_carbon, {
   if (!carbon_overlay_visible()) {
     updateActionButton(
@@ -635,7 +679,7 @@ observeEvent(input$toggle_carbon, {
 
     carbon_palette <- colorFactor(
       palette = colorRampPalette(brewer.pal(12, "Paired"))(48),
-      domain = unique(ahupuaa_carbon_data$detailed_lc_unit) # the text column
+      domain = unique(ahupuaa_carbon_data$biome_unit) # the text column
     )
 
     ahupuaa_carbon_area_summary <- ahupuaa_carbon_data %>%
@@ -645,16 +689,14 @@ observeEvent(input$toggle_carbon, {
         area_acres = area_m2 * 0.000247105
       ) %>%
       st_drop_geometry() %>%
-      group_by(detailed_lc_unit) %>%
+      group_by(biome_unit) %>%
       summarise(
-        polygon_count = n(),
         total_area_acres = sum(area_acres),
         avg_area_km2 = mean(area_km2),
         min_area_km2 = min(area_km2),
         max_area_km2 = max(area_km2)
       ) %>%
       arrange(desc(total_area_acres))
-    print(ahupuaa_carbon_area_summary)
 
     output$table <-
       renderDataTable({
@@ -670,11 +712,110 @@ observeEvent(input$toggle_carbon, {
           )
       })
 
+    output$plant_table <- renderDataTable(
+      {
+        # Get matching plants
+        unique_biomes <- unique(ahupuaa_carbon_area_summary$biome_unit)
+        all_matching_plants <- get_plants_for_biomes(
+          unique_biomes,
+          plant_biome_data
+        )
+
+        # Rank plants by biome abundance
+        ranked_plants <- plant_biome_data %>%
+          filter(Plant_Name %in% all_matching_plants) %>%
+          filter(!is.na(Biomes) & Biomes != "") %>%
+          rowwise() %>%
+          mutate(
+            # Split biomes for this plant
+            plant_biomes = list(strsplit(Biomes, " \\| ")[[1]]),
+            # Calculate max area among this plant's biomes
+            max_biome_area = {
+              areas <- ahupuaa_carbon_area_summary$total_area_acres[
+                ahupuaa_carbon_area_summary$biome_unit %in% plant_biomes
+              ]
+              if (length(areas) > 0) max(areas, na.rm = TRUE) else 0
+            },
+            # Get the most abundant biome name for this plant
+            primary_biome = {
+              matching_biomes <- ahupuaa_carbon_area_summary %>%
+                filter(biome_unit %in% plant_biomes) %>%
+                arrange(desc(total_area_acres))
+              if (nrow(matching_biomes) > 0) {
+                matching_biomes$biome_unit[1]
+              } else {
+                NA_character_
+              }
+            }
+          ) %>%
+          ungroup() %>%
+          # Replace Inf with 0 for plants with no matching biomes
+          mutate(
+            max_biome_area = ifelse(
+              is.infinite(max_biome_area) | is.na(max_biome_area),
+              0,
+              max_biome_area
+            )
+          )
+
+        # Join with full plant data and create display table
+        plant_table <- ranked_plants %>%
+          left_join(
+            full_plant_data,
+            by = "Plant_Name",
+            suffix = c("_biome", "_full")
+          ) %>%
+          # Sort by biome area (descending), then by plant name
+          arrange(desc(max_biome_area), Plant_Name) %>%
+          # Choose which columns to display
+          select(
+            Common_Names,
+            Plant_Name,
+            Biomes,
+            primary_biome,
+            max_biome_area,
+            Plant_Form_Growth_Habit,
+            Flower_Colors,
+            Water_Requirements,
+            Light_Conditions,
+            Natural_Range,
+            URL_biome # Use the biome URL
+          ) %>%
+          # Make URLs clickable and format area
+          mutate(
+            max_biome_area = round(max_biome_area, 1),
+            URL = sprintf('<a href="%s" target="_blank">View</a>', URL_biome)
+          ) %>%
+          select(-URL_biome) # Remove the original URL column
+
+        plant_table
+      },
+      options = list(
+        pageLength = 25,
+        lengthMenu = c(10, 25, 50, 100),
+        scrollX = TRUE
+      ),
+      escape = FALSE,
+      colnames = c(
+        "Common Names",
+        "Scientific Name",
+        "All Biomes",
+        "Primary Biome",
+        "Area (acres)",
+        "Growth Habit",
+        "Flower Colors",
+        "Water",
+        "Light",
+        "Islands",
+        "Profile"
+      )
+    )
+
     leafletProxy("main_map") %>%
       addPolygons(
         data = ahupuaa_carbon_data,
         group = "Carbon Data",
-        fillColor = ~ carbon_palette(detailed_lc_unit),
+        fillColor = ~ carbon_palette(biome_unit),
         color = "black",
         weight = 1,
         fillOpacity = 0.7,
@@ -747,7 +888,7 @@ uiOutput("carbon_toggle_button")
 
 
 
-## Column {width=70%}
+## Column {width=50%}
 
 ### Map View {height = 70%}
 
@@ -758,6 +899,14 @@ leafletOutput("main_map")
 
 ### Data Summary {height = 30%}
 ```{r}
-dataTableOutput("table")
 
+dataTableOutput("plant_table")
+```
+
+
+## Column {width=20%}
+
+### Plant view {height = 100%}
+```{r}
+dataTableOutput("table")
 ```
