@@ -100,6 +100,10 @@ full_plant_data$Plant_Name <- gsub(
 )
 full_plant_data$Plant_Name <- trimws(full_plant_data$Plant_Name)
 
+ahupuaa_carbon_data_full <- st_read(
+  "processed_data/carbon_biome_hierarchy.geojson",
+  quiet = TRUE
+)
 
 ```
 
@@ -662,12 +666,13 @@ observeEvent(input$toggle_carbon, {
     ahupuaa_name <- gsub("_N-A", "_N/A", input$ahupuaa)
     ahupuaa_name <- gsub(" ", "_", input$ahupuaa)
 
-    ahupuaa_carbon_data <- st_read(
-      str_glue(
-        "processed_data/ahupuaa_data/carbon_polygons_{input$mokupuni}_{input$moku}_{ahupuaa_name}.geojson"
-      ),
-      quiet = TRUE
-    )
+    ahupuaa_carbon_data <- ahupuaa_carbon_data_full %>%
+      filter(
+        mokupuni == input$mokupuni,
+        moku == input$moku,
+        ahupuaa == ahupuaa_name
+      )
+
     ahupuaa_carbon_data <- ahupuaa_carbon_data %>%
       st_collection_extract("POLYGON") %>%
       filter(st_is_valid(.))
@@ -888,20 +893,8 @@ observeEvent(input$toggle_carbon, {
         weight = 1,
         fillOpacity = 0.7,
         popup = ~ paste0(
-          "<p><strong>Detailed LC:</strong> ",
-          detailed_lc_unit,
-          "</p>",
-          "<p><strong>General LC:</strong> ",
-          general_lc_unit,
-          "</p>",
           "<p><strong>Biome Unit:</strong> ",
           biome_unit,
-          "</p>",
-          "<p><strong>Moisture:</strong> ",
-          moisture_zone,
-          "</p>",
-          "<p><strong>Habitat:</strong> ",
-          habitat_status,
           "</p>"
         )
       )

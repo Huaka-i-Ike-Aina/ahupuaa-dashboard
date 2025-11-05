@@ -5,11 +5,22 @@ format: html
 
 ```{r setup-install, include=FALSE}
 
-packages <- c("leaflet", "sf", "dplyr", "knitr", "jsonlite", "purrr")
+packages <- c(
+  "leaflet",
+  "sf",
+  "dplyr",
+  "knitr",
+  "jsonlite",
+  "purrr",
+  "future",
+  "furrr",
+  "progressr",
+  "parallel"
+)
 
 install_if_missing <- function(pkg) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, repos='http://cran.us.r-project.org')
+    install.packages(pkg, repos = 'http://cran.us.r-project.org')
   }
 }
 
@@ -363,140 +374,407 @@ unique_counts <- raw_carbon_data %>%
 unique_counts
 ```
 
-```{r carbon-assessment-merge-mokupuni}
+```{r carbon-assessment-processing}
+
+# # Read input data
+# carbon_polygons <- st_read(
+#   "raw_data/Carbon_Assessment_of_Hawaii_-_Land_Cover_-_Biome_Unit.geojson"
+# )
+
+# merged_mokupuni <- st_read(
+#   "processed_data/merged_mokupuni_ridge_to_reef.geojson"
+# )
+
+# moku_data <- st_read("raw_data/Moku_Ridge_To_Reef_(DAR).geojson")
+
+# ahupuaa_data <- st_read("processed_data/merged_ahupuaa.geojson")
+
+# # Simplify carbon data - keep only biome_unit and geometry
+# carbon_simple <- carbon_polygons %>%
+#   select(biome_unit)
+
+# # Single-pass hierarchical spatial join
+# # This assigns mokupuni, moku, and ahupuaa in one operation
+# carbon_with_hierarchy <- carbon_simple %>%
+#   # Join with ahupuaa (most granular level)
+#   st_join(
+#     ahupuaa_data %>% select(ahupuaa, moku, mokupuni),
+#     join = st_intersects,
+#     left = TRUE # Keep all carbon polygons, even unmatched
+#   )
+
+# # Handle polygons that cross boundaries by splitting them
+# # This ensures no data is lost at borders
+# carbon_split <- carbon_with_hierarchy %>%
+#   # Group by unique combinations to identify duplicates (polygons crossing boundaries)
+#   group_by(geometry) %>%
+#   mutate(
+#     boundary_crosses = n() > 1,
+#     poly_id = row_number()
+#   ) %>%
+#   ungroup()
+
+# # For polygons that cross boundaries, split them by intersection
+# polygons_crossing <- carbon_split %>%
+#   filter(boundary_crosses == TRUE) %>%
+#   select(biome_unit, geometry) %>%
+#   distinct()
+
+# if (nrow(polygons_crossing) > 0) {
+#   # Split crossing polygons by intersecting with ahupuaa boundaries
+#   split_polygons <- st_intersection(
+#     polygons_crossing,
+#     ahupuaa_data %>% select(ahupuaa, moku, mokupuni)
+#   )
+
+#   # Remove original crossing polygons and add split versions
+#   carbon_final <- carbon_split %>%
+#     filter(boundary_crosses == FALSE) %>%
+#     select(biome_unit, ahupuaa, moku, mokupuni) %>%
+#     bind_rows(
+#       split_polygons %>%
+#         select(biome_unit, ahupuaa, moku, mokupuni)
+#     )
+# } else {
+#   carbon_final <- carbon_split %>%
+#     select(biome_unit, ahupuaa, moku, mokupuni)
+# }
+
+# # Ensure valid geometries
+# carbon_final <- carbon_final %>%
+#   st_make_valid()
+
+# # Write single output file
+# st_write(
+#   carbon_final,
+#   "processed_data/carbon_biome_hierarchy.geojson",
+#   delete_dsn = TRUE
+# )
+
+# # Summary statistics
+# cat("\n=== Processing Summary ===\n")
+# cat(sprintf("Total polygons processed: %d\n", nrow(carbon_final)))
+# cat(sprintf("Polygons with ahupuaa: %d\n", sum(!is.na(carbon_final$ahupuaa))))
+# cat(sprintf("Polygons with moku: %d\n", sum(!is.na(carbon_final$moku))))
+# cat(sprintf("Polygons with mokupuni: %d\n", sum(!is.na(carbon_final$mokupuni))))
+# cat(sprintf("Unassigned polygons: %d\n", sum(is.na(carbon_final$ahupuaa))))
+# cat(sprintf("Unique biomes: %d\n", length(unique(carbon_final$biome_unit))))
+
+# # Optional: Create summary by hierarchy level
+# biome_summary <- carbon_final %>%
+#   st_drop_geometry() %>%
+#   group_by(mokupuni, moku, ahupuaa, biome_unit) %>%
+#   summarise(polygon_count = n(), .groups = "drop") %>%
+#   arrange(mokupuni, moku, ahupuaa, biome_unit)
+
+# write.csv(
+#   biome_summary,
+#   "processed_data/carbon_biome_summary.csv",
+#   row.names = FALSE
+# )
+
+# cat("\nOutput files created:\n")
+# cat("  - processed_data/carbon_biome_hierarchy.geojson\n")
+# cat("  - processed_data/carbon_biome_summary.csv\n")
+
+# ==============================================================================
+# CONFIGURATION
+# ==============================================================================
+
+# Set number of cores for parallel processing
+n_cores <- max(1, detectCores() - 1)
+cat(sprintf("Using %d cores for parallel processing\n\n", n_cores))
+
+# Processing parameters
+SIMPLIFY_TOLERANCE <- 10 # meters - adjust based on precision needs
+CHUNK_SIZE <- 1000 # polygons per chunk - adjust based on RAM
+
+# ==============================================================================
+# STEP 1: READ AND SIMPLIFY DATA
+# ==============================================================================
+
+cat("=== STEP 1: Loading and simplifying data ===\n")
+
+# Read input data
+cat("Reading carbon polygons...\n")
 carbon_polygons <- st_read(
-  "raw_data/Carbon_Assessment_of_Hawaii_-_Land_Cover_-_Biome_Unit.geojson"
+  "raw_data/Carbon_Assessment_of_Hawaii_-_Land_Cover_-_Biome_Unit.geojson",
+  quiet = TRUE
 )
+cat(sprintf("  Loaded %d polygons\n", nrow(carbon_polygons)))
 
+cat("Reading boundary data...\n")
 merged_mokupuni <- st_read(
-  "processed_data/merged_mokupuni_ridge_to_reef.geojson"
+  "processed_data/merged_mokupuni_ridge_to_reef.geojson",
+  quiet = TRUE
+)
+moku_data <- st_read("raw_data/Moku_Ridge_To_Reef_(DAR).geojson", quiet = TRUE)
+ahupuaa_data <- st_read("processed_data/merged_ahupuaa.geojson", quiet = TRUE)
+cat(sprintf("  Loaded %d ahupuaa boundaries\n", nrow(ahupuaa_data)))
+
+# Simplify geometries early
+cat("\nSimplifying geometries...\n")
+carbon_simple <- carbon_polygons %>%
+  select(biome_unit) %>%
+  st_simplify(dTolerance = SIMPLIFY_TOLERANCE, preserveTopology = TRUE) %>%
+  st_make_valid() %>%
+  mutate(original_id = row_number()) # Track original polygons
+
+ahupuaa_simple <- ahupuaa_data %>%
+  select(ahupuaa, moku, mokupuni) %>%
+  st_simplify(dTolerance = SIMPLIFY_TOLERANCE, preserveTopology = TRUE) %>%
+  st_make_valid()
+
+cat(sprintf("  Simplified %d carbon polygons\n", nrow(carbon_simple)))
+cat(sprintf("  Simplified %d ahupuaa boundaries\n", nrow(ahupuaa_simple)))
+
+# ==============================================================================
+# STEP 2: PREPARE CHUNKS FOR PARALLEL PROCESSING
+# ==============================================================================
+
+cat("\n=== STEP 2: Preparing data chunks ===\n")
+
+n_chunks <- ceiling(nrow(carbon_simple) / CHUNK_SIZE)
+cat(sprintf(
+  "  Dividing into %d chunks of ~%d polygons each\n",
+  n_chunks,
+  CHUNK_SIZE
+))
+
+# Split into chunks
+carbon_chunks <- split(
+  carbon_simple,
+  rep(1:n_chunks, each = CHUNK_SIZE, length.out = nrow(carbon_simple))
 )
 
+# ==============================================================================
+# STEP 3: PARALLEL SPATIAL JOIN
+# ==============================================================================
 
-# Spatial join to assign each parcel to a district
-polygons_within_mokupuni <- st_join(
-  carbon_polygons,
-  merged_mokupuni,
-  join = st_intersects
-)
+cat("\n=== STEP 3: Performing spatial joins (parallel) ===\n")
 
-# Separate by district
-mokupuni_names <- unique(polygons_within_mokupuni$mokupuni)
-
-
-for (mokupuni_name in mokupuni_names) {
-  if (!is.na(mokupuni_name) && mokupuni_name != "") {
-    mokupuni_polygons <- polygons_within_mokupuni %>%
-      filter(mokupuni == mokupuni_name)
-
-    st_write(
-      mokupuni_polygons,
-      paste0(
-        "processed_data/mokupuni_data/carbon_polygons_",
-        mokupuni_name,
-        ".geojson"
-      ),
-      delete_dsn = TRUE
-    )
-  }
-}
-
-# Parcels not in any district
-polygons_unassigned <- polygons_within_mokupuni %>%
-  filter(is.na(mokupuni))
-
-st_write(
-  polygons_unassigned,
-  "processed_data/mokupuni_data/carbon_polygons_unassigned.geojson",
-  delete_dsn = TRUE
-)
-
-```
-
-```{r carbon-assessment-merge-moku}
-
-moku_data <- st_read("raw_data/Moku_Ridge_To_Reef_(DAR).geojson")
-hierarchy_data <- fromJSON(
-  "processed_data/ahupuaa_hierarchy.json"
-)
-
-ahupuaa_data <- st_read("processed_data/merged_ahupuaa.geojson")
-
-# for each mokupuni, separate by moku
-# need to maintain both mokupuni and moku columns and names to be able to filter properly
-for (mokupuni_name in mokupuni_names) {
-  mokupuni_polygons <- polygons_within_mokupuni %>%
-    filter(mokupuni == mokupuni_name)
-
-  # Spatial join to assign each parcel to a district
-  polygons_within_moku <- st_join(
-    mokupuni_polygons,
-    moku_data,
+# Function to process each chunk
+process_chunk <- function(chunk_data, ahupuaa_boundaries) {
+  st_join(
+    chunk_data,
+    ahupuaa_boundaries,
     join = st_intersects,
-    suffix = c("", "_moku")
+    left = TRUE
   )
-  # polygons_within_moku
-
-  moku_names <- unique(polygons_within_moku$moku)
-
-  for (moku_name in moku_names) {
-    if (!is.na(moku_name) && moku_name != "") {
-      moku_polygons <- polygons_within_moku %>%
-        filter(moku == moku_name)
-
-      clipped_moku_polygons <- st_intersection(
-        moku_polygons,
-        moku_data %>% filter(mokupuni == mokupuni_name, moku == moku_name)
-      )
-      st_write(
-        clipped_moku_polygons,
-        paste0(
-          "processed_data/moku_data/carbon_polygons_",
-          gsub(" ", "_", mokupuni_name),
-          "_",
-          gsub(" ", "_", moku_name),
-          ".geojson"
-        ),
-        delete_dsn = TRUE
-      )
-
-      ahupuaa_names <- hierarchy_data$hierarchy[[mokupuni_name]]$moku[[
-        moku_name
-      ]]$ahupuaa
-
-      for (ahupuaa_name in ahupuaa_names) {
-        ahupuaa_polygons <- st_intersection(
-          clipped_moku_polygons,
-          ahupuaa_data %>%
-            filter(
-              mokupuni == mokupuni_name,
-              moku == moku_name,
-              ahupuaa == ahupuaa_name
-            )
-        )
-        print(moku_name)
-        print(ahupuaa_name)
-        if (grepl("/", ahupuaa_name)) {
-          ahupuaa_name <- gsub("/", "-", ahupuaa_name)
-        }
-
-        if (nrow(ahupuaa_polygons) > 0) {
-          st_write(
-            ahupuaa_polygons,
-            paste0(
-              "processed_data/ahupuaa_data/carbon_polygons_",
-              gsub(" ", "_", mokupuni_name),
-              "_",
-              gsub(" ", "_", moku_name),
-              "_",
-              gsub(" ", "_", ahupuaa_name),
-              ".geojson"
-            ),
-            delete_dsn = TRUE
-          )
-        }
-      }
-    }
-  }
 }
+
+# Set up parallel processing
+plan(multisession, workers = n_cores)
+
+# Process all chunks in parallel with simple progress tracking
+cat(sprintf("  Processing %d chunks...\n", n_chunks))
+
+carbon_joined_list <- future_map(
+  seq_along(carbon_chunks),
+  function(i) {
+    # Simple progress message
+    if (i %% 10 == 0 || i == length(carbon_chunks)) {
+      message(sprintf(
+        "    Processed %d/%d chunks (%.1f%%)",
+        i,
+        length(carbon_chunks),
+        i / length(carbon_chunks) * 100
+      ))
+    }
+    result <- process_chunk(carbon_chunks[[i]], ahupuaa_simple)
+    return(result)
+  },
+  .options = furrr_options(seed = TRUE)
+)
+
+# Clean up parallel processing
+plan(sequential)
+
+cat("  Combining chunk results...\n")
+carbon_with_hierarchy <- bind_rows(carbon_joined_list)
+
+cat(sprintf(
+  "  Joined %d polygon-boundary pairs\n",
+  nrow(carbon_with_hierarchy)
+))
+
+# ==============================================================================
+# STEP 4: HANDLE BOUNDARY CROSSINGS
+# ==============================================================================
+
+cat("\n=== STEP 4: Handling boundary-crossing polygons ===\n")
+
+# Identify polygons that matched multiple ahupuaa (boundary crossers)
+polygon_match_counts <- carbon_with_hierarchy %>%
+  st_drop_geometry() %>%
+  group_by(original_id) %>%
+  summarise(match_count = n(), .groups = "drop")
+
+duplicate_ids <- polygon_match_counts %>%
+  filter(match_count > 1) %>%
+  pull(original_id)
+
+cat(sprintf("  Found %d polygons crossing boundaries\n", length(duplicate_ids)))
+
+# Separate clean vs boundary-crossing polygons
+carbon_clean <- carbon_with_hierarchy %>%
+  filter(!original_id %in% duplicate_ids)
+
+carbon_crossing <- carbon_with_hierarchy %>%
+  filter(original_id %in% duplicate_ids)
+
+cat(sprintf("  Clean polygons: %d\n", nrow(carbon_clean)))
+cat(sprintf(
+  "  Boundary-crossing polygon instances: %d\n",
+  nrow(carbon_crossing)
+))
+
+# Process boundary-crossing polygons
+if (length(duplicate_ids) > 0) {
+  cat("  Splitting boundary-crossing polygons...\n")
+
+  # Get unique crossing polygons
+  crossing_unique <- carbon_crossing %>%
+    distinct(original_id, .keep_all = TRUE) %>%
+    select(biome_unit, original_id)
+
+  # Set up parallel processing for intersection
+  plan(multisession, workers = n_cores)
+
+  # Split crossing polygons into chunks for parallel intersection
+  n_crossing_chunks <- min(n_cores * 2, nrow(crossing_unique))
+  crossing_chunks <- split(
+    crossing_unique,
+    rep(1:n_crossing_chunks, length.out = nrow(crossing_unique))
+  )
+
+  # Process intersections in parallel
+  cat(sprintf(
+    "  Processing %d crossing polygons in %d chunks...\n",
+    nrow(crossing_unique),
+    n_crossing_chunks
+  ))
+
+  split_polygons_list <- future_map(
+    seq_along(crossing_chunks),
+    function(i) {
+      if (i %% 5 == 0 || i == length(crossing_chunks)) {
+        message(sprintf(
+          "    Processed %d/%d intersection chunks",
+          i,
+          length(crossing_chunks)
+        ))
+      }
+      result <- st_intersection(crossing_chunks[[i]], ahupuaa_simple)
+      return(result)
+    },
+    .options = furrr_options(seed = TRUE)
+  )
+
+  plan(sequential)
+
+  split_polygons <- bind_rows(split_polygons_list)
+
+  cat(sprintf(
+    "  Created %d split polygons from boundary crossers\n",
+    nrow(split_polygons)
+  ))
+
+  # Combine clean + split
+  carbon_final <- bind_rows(
+    carbon_clean %>% select(biome_unit, ahupuaa, moku, mokupuni),
+    split_polygons %>% select(biome_unit, ahupuaa, moku, mokupuni)
+  )
+} else {
+  carbon_final <- carbon_clean %>%
+    select(biome_unit, ahupuaa, moku, mokupuni)
+}
+
+# ==============================================================================
+# STEP 5: FINAL CLEANUP AND VALIDATION
+# ==============================================================================
+
+cat("\n=== STEP 5: Final cleanup ===\n")
+
+carbon_final <- carbon_final %>%
+  st_make_valid() %>%
+  distinct() # Remove any exact duplicates
+
+cat(sprintf("  Final polygon count: %d\n", nrow(carbon_final)))
+
+# ==============================================================================
+# STEP 6: WRITE OUTPUT
+# ==============================================================================
+
+cat("\n=== STEP 6: Writing output ===\n")
+
+cat("Writing GeoJSON file...\n")
+st_write(
+  carbon_final,
+  "processed_data/carbon_biome_hierarchy.geojson",
+  delete_dsn = TRUE,
+  quiet = FALSE
+)
+
+cat("Creating summary CSV...\n")
+biome_summary <- carbon_final %>%
+  st_drop_geometry() %>%
+  group_by(mokupuni, moku, ahupuaa, biome_unit) %>%
+  summarise(polygon_count = n(), .groups = "drop") %>%
+  arrange(mokupuni, moku, ahupuaa, biome_unit)
+
+write.csv(
+  biome_summary,
+  "processed_data/carbon_biome_summary.csv",
+  row.names = FALSE
+)
+
+# ==============================================================================
+# SUMMARY STATISTICS
+# ==============================================================================
+
+cat("\n")
+cat(strrep("=", 70), "\n")
+cat("PROCESSING COMPLETE\n")
+cat(strrep("=", 70), "\n\n")
+
+cat("Summary Statistics:\n")
+cat(sprintf("  Total polygons processed: %d\n", nrow(carbon_final)))
+cat(sprintf(
+  "  Polygons with ahupuaa: %d (%.1f%%)\n",
+  sum(!is.na(carbon_final$ahupuaa)),
+  sum(!is.na(carbon_final$ahupuaa)) / nrow(carbon_final) * 100
+))
+cat(sprintf(
+  "  Polygons with moku: %d (%.1f%%)\n",
+  sum(!is.na(carbon_final$moku)),
+  sum(!is.na(carbon_final$moku)) / nrow(carbon_final) * 100
+))
+cat(sprintf(
+  "  Polygons with mokupuni: %d (%.1f%%)\n",
+  sum(!is.na(carbon_final$mokupuni)),
+  sum(!is.na(carbon_final$mokupuni)) / nrow(carbon_final) * 100
+))
+cat(sprintf(
+  "  Unassigned polygons: %d (%.1f%%)\n",
+  sum(is.na(carbon_final$ahupuaa)),
+  sum(is.na(carbon_final$ahupuaa)) / nrow(carbon_final) * 100
+))
+cat(sprintf("  Unique biomes: %d\n", length(unique(carbon_final$biome_unit))))
+
+cat("\nOutput files created:\n")
+cat("  - processed_data/carbon_biome_hierarchy.geojson\n")
+cat("  - processed_data/carbon_biome_summary.csv\n\n")
+
+# Biome distribution
+cat("Top 10 Biomes by Polygon Count:\n")
+top_biomes <- carbon_final %>%
+  st_drop_geometry() %>%
+  count(biome_unit, sort = TRUE) %>%
+  head(10)
+print(top_biomes) # Remove n = 10
+
+
+cat("\n")
+cat(strrep("=", 70), "\n")
 ```
