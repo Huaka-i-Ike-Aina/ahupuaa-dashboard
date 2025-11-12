@@ -1,0 +1,3791 @@
+{
+  "hierarchy": {
+    "Hawaiʻi": {
+      "name": "Hawaiʻi",
+      "moku": {
+        "Hilo": {
+          "name": "Hilo",
+          "ahupuaa": ["Alakahi", "Aleamai", "Haʻikū", "Hakalau", "Honohina", "Honomainoa", "Honomū, Kuhua", "Humuʻula", "ʻAlae", "ʻOʻōkala", "Kahaliʻi", "Kahoahuna, Paʻana", "Kahua", "Kaʻakepa", "Kaʻapoko", "Kaʻieʻie", "Kaiaʻakea", "Kaihuiki", "Kaiwiki, Maumau", "Kaiwikinui", "Kalalau", "Kalaoa", "Kamaʻeʻe", "Kauhiula", "Kaūmana", "Kaupakuea, Makea", "Kawainui", "Kīkala", "Kūkūau 1", "Kūkūau 2", "Kukuikea", "Kulaʻikahonu", "Kulaʻimano", "Kulanakiʻi, Kahīnano", "Laimi", "Laupāhoehoe, Welokā", "Lepoloa, Kaluakailio", "Maʻulili", "Makahanaloa, Pepeʻekeo", "Mālamalamaiki", "Manoloa", "Mauluaiki", "Mauluanui", "Mokuhonua, Halepuna", "Mokuoniki", "Nanue", "Onomea", "Opea, Peleau, ʻAwa", "Pāhoehoe", "Paihaʻaloa", "Pāpaʻa", "Pāpaʻikou", "Paukaʻa", "Pihā, Kahuku", "Piʻihonua", "Ponahawai", "Puaʻakuloa, Kapena", "Pueopaku", "Puʻuʻeo", "Punahoa 1", "Punahoa 2", "Puumoi", "Umauma", "Waiākea", "Waikaumalo", "Wailea", "Wailua", "Wainaku", "Waipunalei"],
+          "ahupuaa_count": 69
+        },
+        "Hāmākua": {
+          "name": "Hāmākua",
+          "ahupuaa": ["Alaeakila, Kaapahu", "Au 1-2, Āhualoa", "Haina", "Hanapai, Niupuka", "Hauola", "Hōʻea, Manowaikohau", "Honokaia", "Honopue", "ʻĀʻāmanu", "ʻĀpua", "Kaʻala", "Kaʻauhuhu", "Kaʻohe", "Kaʻohe Mauka", "Kainehe", "Kaiwiki", "Kalakalaula", "Kalopā", "Kalua, Pakiloa, ʻŌuhi, Kaao", "Kamaui", "Kamoauau", "Kamoku", "Kanahonua", "Kapoaula", "Kapulena", "Kapulena, Haukoʻi, K", "Kawela", "Keaʻā", "Kemau", "Koholālele", "Koloaha, Kulihaʻi", "Kuilei 1-2", "Kūkaʻiau", "Kukuihaele", "Laupāhoehoe 1", "Malanahae", "Mānienie", "Manowaialeʻe", "Moʻoiki", "Nakoʻoka, Laupāhoeho", "Namoku, Papuaʻa", "Nienie", "Niupea, Kealakaha", "Opihilala", "Paʻalaea", "Pāʻauhau", "Pāʻauhau-mauka", "Paʻauilo", "Papaʻanui", "Papaki", "Papalele", "Pohakuhaku", "Waiʻaleʻale 1-2", "Waikaʻalulu", "Waikapu", "Waikoekoe", "Waikoloa", "Waimanu", "Waipiʻo", "Weha, Mahakuolo"],
+          "ahupuaa_count": 60
+        },
+        "Kaʻū": {
+          "name": "Kaʻū",
+          "ahupuaa": ["Halelua, Wailoa, Kumu", "Hīleaiki", "Hīleanui", "Hionamoa", "Honuʻapo", "Kahilipaliiki, Kah", "Kahilipalinui", "Kahuku", "Kaʻalaʻala, Kanaio", "Kaʻalāiki, Hiʻonaʻā", "Kamāʻoa, Puʻuʻeo, Ke", "Kapāpala", "Kaunāmano, Napauku", "Kāwala", "Kawela", "Keaīwa", "Keauhou", "Kīʻao", "Kīʻolokū", "Kiolakaʻa, Puʻumakaʻā", "Manukā", "Mohokea", "Mohokeanui", "Pāʻauʻau 1, Palima", "Pāʻauʻau 2", "Pākiniiki", "Pākininui, Puʻulena", "Palauhulu 1-2", "Punaluʻu", "Waiʻōhinu", "Wailau, Nīnole, Kaʻa", "Waiomao"],
+          "ahupuaa_count": 32
+        },
+        "Kohala": {
+          "name": "Kohala",
+          "ahupuaa": ["Apuakohau, Kukuiwaluhia", "Awalua", "Hāʻena", "Halaʻula", "Hālawa, Napapaʻa", "Halelua", "Hāwī", "Honoipu", "Honokāne", "Honomakaʻu", "Honopueo", "ʻĀʻamakaō", "ʻĀinakea", "ʻAnaehoʻomalu", "ʻĀwini", "ʻIole", "ʻŌuli", "ʻUpolu", "Kāhei, Hualua", "Kahuā 1", "Kahuā 2", "Kaʻauhuhu", "Kaihoʻonā", "Kaiholena", "Kaipuhaʻa, Lamaloloa", "Kalala 1-2, Kokiʻo", "Kamano", "Kapaʻa", "Kapaʻanui", "Kapaʻau", "Kapuʻa", "Kapunapuna", "Kaupalaoa", "Kawaihae 1", "Kawaihae 2", "Kealahewa", "Kehena 1, Kipi", "Kehena 2", "Keoniki, Kauniho, Wa", "Kiʻiokalani", "Kokoiki", "Kou", "Kukuipahu", "Lālāmilo, Keanuʻiʻomanō", "Lanikepu", "Māhukona, Hihiu, K", "Makanikahio 1-2, Auau", "Makapala, Niuliʻi", "Makeanehu", "Makiloa, Pahinahina", "Maulili", "Momoualoa", "Nunuluiki", "Nunulunui", "Ohanaula", "Opihipau, Hukiaʻa", "Pāhoa", "Pauahi", "Pōhakulua", "Pōhakulua, Ahulua", "Pololū", "Puaiki", "Puakea", "Puanui", "Puehuehu, Laʻaumama", "Puʻuepa", "Puʻukapu", "Puʻukawaiwai, Panoluʻukia", "Puʻukole, Koea, Lapakahi", "Puʻuokumau", "Waikā", "Waimea, Waikoloa"],
+          "ahupuaa_count": 72
+        },
+        "Kona": {
+          "name": "Kona",
+          "ahupuaa": ["Anapuka, Hoʻopūloa", "Awakeʻe", "Haleohiu", "Hamanamana", "Hoʻokena", "Hōlualoa 1-2", "Hōlualoa 3", "Hōlualoa 4", "Honalo, Māʻihi 1-2", "Hōnaunau", "Honokōhau 1-3", "Honokua", "Honuaʻula", "ʻAlikā", "ʻOʻoma 1", "ʻOʻoma 2", "ʻŌlelomoana 1-4, Opihihali", "Kahaluʻu", "Kahauloa 2", "Kaʻapuna", "Kaʻawaloa", "Kaʻohe 1-3", "Kaʻohe 4", "Kaʻohe 5", "Kaʻūpūlehu", "Kalāhiki", "Kalaoa 1-5", "Kaloko", "Kapuʻa", "Kau", "Kauhakō", "Kaulana, Awalua, ʻŌhiki", "Kaulanamauna", "Kauleolī 1-2", "Kaumalumalu, Pāhoehoe", "Keahuolū", "Kealakehe", "Kealakekua, Kīloa 1", "Keālia 1", "Keālia 2", "Keauhou 1", "Keauhou 2", "Keʻei 1", "Keʻei 2", "Keʻekeʻe 1-2, Kanakau", "Kēōkea", "Kiʻilae", "Kīpahoehoe", "Kohanaiki", "Kolo", "Kūkiʻo, Maniniʻōwali", "Kukuiopaʻe 1-2", "Lanihau 1-2, Moeauo", "Mahaiʻula", "Makaʻula", "Makalawena", "Okoe 1-2", "Pāhoehoe A 1-4, Mau", "Pāhoehoe B 1-3", "Pāpā 1", "Pāpā 2", "Puaʻa 1", "Puaʻa 2-3, Waiʻaha 1", "Puapuaʻa 2", "Puʻuanahulu", "Puʻuwaʻawaʻa", "Waiea", "Waikākuʻu"],
+          "ahupuaa_count": 68
+        },
+        "Puna": {
+          "name": "Puna",
+          "ahupuaa": ["Ahalanui, Laepaoʻo", "Halepuaʻa, Kanekiki", "Honolulu", "Hulunanai", "ʻĀpua", "ʻŌlaʻa", "Iliʻililoa", "Kahaualeʻa", "Kahue", "Kahuwai", "Kaimū", "Kalapana, Kupahua", "Kamoamoa", "Kapoho", "Kauaea", "Kaueleau", "Kaukulau, Ki (b)", "Keahialaka", "Keaʻau", "Kealakomo", "Keauohana, Kehena", "Keonepokoiki", "Keonepokonui", "Kīkala 1-2, Kēōkea", "Kukuihala, Kamāʻili", "Kula", "Laeʻapuki, Pānaui-iki", "Makuʻu, Pōpōkī, Hālo", "Malama 1", "Nānāwale", "Opihikao", "Pānauinui", "Pohoiki", "Poupou 1-2, Pūlama", "Pūʻālaʻa", "Puua", "Waʻawaʻa", "Waiakahiula, Kaʻohe", "Waikahekahe", "Waikahekaheiki", "Waikahekahenui"],
+          "ahupuaa_count": 41
+        }
+      },
+      "moku_count": 6,
+      "total_ahupuaa": 342
+    },
+    "Kahoʻolawe": {
+      "name": "Kahoʻolawe",
+      "moku": {
+        "Honuaʻula": {
+          "name": "Honuaʻula",
+          "ahupuaa": "N/A",
+          "ahupuaa_count": 1
+        }
+      },
+      "moku_count": 1,
+      "total_ahupuaa": 1
+    },
+    "Kauaʻi": {
+      "name": "Kauaʻi",
+      "moku": {
+        "Haleleʻa": {
+          "name": "Haleleʻa",
+          "ahupuaa": ["Hāʻena", "Hanalei", "Kalihikai", "Kalihiwai", "Lumahaʻi", "Waiʻoli", "Waikoko", "Wainiha", "Waipā"],
+          "ahupuaa_count": 9
+        },
+        "Kona": {
+          "name": "Kona",
+          "ahupuaa": ["Hanapēpē", "ʻEleʻele", "Kalāheo", "Kōloa", "Lāwai", "Māhāʻulepū", "Makaweli", "Pāʻā", "Wahiawa", "Waimea", "Weliweli"],
+          "ahupuaa_count": 11
+        },
+        "Koʻolau": {
+          "name": "Koʻolau",
+          "ahupuaa": ["Anahola", "East Waiakalua", "ʻAliomanu", "Kāhili", "Kaʻakaʻaniu", "Kīlauea", "Lepeuli", "Moloaʻa", "Nāmāhana", "Papaʻa", "Pīlaʻa", "Waiakalua", "Waipake", "West Waiakalua"],
+          "ahupuaa_count": 14
+        },
+        "Nāpali": {
+          "name": "Nāpali",
+          "ahupuaa": ["Hanakāpīʻai", "Hanakoa", "Honopū", "Kalalau", "Pōhakuao"],
+          "ahupuaa_count": 5
+        },
+        "Puna": {
+          "name": "Puna",
+          "ahupuaa": ["Haʻikū", "Hanamāʻulu", "Kalapakī", "Kamalomaloʻo", "Kapaʻa", "Keālia", "Kīpū", "Kīpū Kai", "Nāwiliwili", "Niumalu", "North Olohena", "South Olohena", "Wailua", "Waipouli"],
+          "ahupuaa_count": 14
+        }
+      },
+      "moku_count": 5,
+      "total_ahupuaa": 53
+    },
+    "Lānaʻi": {
+      "name": "Lānaʻi",
+      "moku": {
+        "Lāhainā": {
+          "name": "Lāhainā",
+          "ahupuaa": ["Kaʻā", "Kalulu", "Kamao", "Kamoku", "Kaohai", "Kaunolū", "Keāliaaupuni", "Keāliakapu", "Mahana", "Maunalei", "Paʻawili", "Pālāwai", "Paomai"],
+          "ahupuaa_count": 13
+        }
+      },
+      "moku_count": 1,
+      "total_ahupuaa": 13
+    },
+    "Maui": {
+      "name": "Maui",
+      "moku": {
+        "Honuaʻula": {
+          "name": "Honuaʻula",
+          "ahupuaa": ["Kalihi", "Kaloʻi", "Kanahena", "Kanaio", "Keauhou", "Kualapa", "Mohopilo", "Palauea", "Papaʻanui", "Papaka Kai", "Papaka Uka"],
+          "ahupuaa_count": 11
+        },
+        "Hāmākualoa": {
+          "name": "Hāmākualoa",
+          "ahupuaa": ["East Hanawana", "East Kaupakulua", "Haʻikū", "Haʻikū Uka", "Halehaku", "Hāmākualoa", "Hanehoi", "Honopou", "ʻŌpana", "Keaaula", "Kealiʻiiki", "Kuiaha", "Mokupapa", "Paʻuwela", "Peahi", "Ulumalu", "Waipiʻoiki", "Waipiʻonui", "West Hanawana", "West Kaupakulua"],
+          "ahupuaa_count": 20
+        },
+        "Hāmākuapoko": {
+          "name": "Hāmākuapoko",
+          "ahupuaa": ["Hāliʻimaile", "Hāmākuapoko", "Makawao"],
+          "ahupuaa_count": 3
+        },
+        "Hāna": {
+          "name": "Hāna",
+          "ahupuaa": ["East Honomāʻele", "Hāmoa", "Haneoʻo", "Honokalani", "Kākiʻo", "Kawaipapa", "Kawela", "Mokae", "Mūʻolea", "Puaʻaluʻu", "Puʻuhaoa", "Wailua", "Waiohonu", "Wākiu", "West Honomāʻele"],
+          "ahupuaa_count": 15
+        },
+        "Kahikinui": {
+          "name": "Kahikinui",
+          "ahupuaa": ["Auwahi", "Kahikinui"],
+          "ahupuaa_count": 2
+        },
+        "Kaupō": {
+          "name": "Kaupō",
+          "ahupuaa": ["Naholoku", "Nakula", "Nuʻu"],
+          "ahupuaa_count": 3
+        },
+        "Koʻolau": {
+          "name": "Koʻolau",
+          "ahupuaa": ["East Makaīwa", "Honomanü", "ʻUlaʻino", "Keʻanae", "Koʻolau", "Paʻakea", "Pāpaʻaʻea", "Puʻuomāile", "Wailuaiki", "Wailuanui", "West Makaīwa"],
+          "ahupuaa_count": 11
+        },
+        "Kula": {
+          "name": "Kula",
+          "ahupuaa": ["Aʻapueo", "ʻAlae 1-2", "ʻAlae 3-4", "ʻŌmaʻopio", "Kaʻonoʻulu", "Kalialinui", "Kamaʻole", "Kamehameiki", "Kamehamenui", "Kēōkea", "Kōheo 1-2", "Makaʻehu", "Paeahu", "Pūlehuiki", "Pūlehunui", "Waiakoa", "Waiohuli"],
+          "ahupuaa_count": 17
+        },
+        "Kāʻanapali": {
+          "name": "Kāʻanapali",
+          "ahupuaa": ["Honokahua", "Honokeana", "Honokōhau", "Honokōwai", "Honolua", "ʻAlaeloa", "Kahakuloa", "Kahana", "Māhinahina 4", "Mailepai", "Moʻomoku", "Nāpili 1", "Nāpili 2-3", "Nāpili 4-5"],
+          "ahupuaa_count": 14
+        },
+        "Kīpahulu": {
+          "name": "Kīpahulu",
+          "ahupuaa": ["ʻAlaeiki", "ʻAlaenui", "Kaʻāpahu", "Kīkoʻo", "Kukuiʻula", "Kukuiʻulaiki"],
+          "ahupuaa_count": 6
+        },
+        "Lāhainā": {
+          "name": "Lāhainā",
+          "ahupuaa": ["Aki", "Grant 3584", "Hāhākea", "Halakaʻa", "Hanakaʻōʻō", "Kahua", "Kapunakea", "Kauaʻula", "Koʻokā", "Kuholilea", "Kuhua", "Kuʻia", "Launiupoko", "Mākila", "Moaliʻi", "Olowalu", "Pāhoa", "Panaʻewa", "Paunau", "Polaiki", "Polanui", "Pūehuehuiki", "Pūehuehunui", "Pūʻou", "Puʻuki", "Ukumehame", "Wahikuli", "Waineʻe"],
+          "ahupuaa_count": 28
+        },
+        "Pūʻali Komohana": {
+          "name": "Pūʻali Komohana",
+          "ahupuaa": ["Waiehu", "Waiheʻe", "Waikapū", "Wailuku"],
+          "ahupuaa_count": 4
+        }
+      },
+      "moku_count": 12,
+      "total_ahupuaa": 134
+    },
+    "Molokaʻi": {
+      "name": "Molokaʻi",
+      "moku": {
+        "Kona": {
+          "name": "Kona",
+          "ahupuaa": ["‘Aha‘ino 1", "‘Aha‘ino 2", "‘Ïloli", "‘Ualapu‘e", "East ʻŌhiʻa", "Hoʻolehua", "Honomuni", "Honoulimaloʻo", "Honouliwai", "Ka‘ili‘ula", "Kahananui", "Kahanui", "Kaʻamola", "Kainalu", "Kalamaʻula", "Kalua‘aha", "Kaluako‘i", "Kamalō", "Kamanoni", "Kamiloloa", "Kamiloloa (Government)", "Kapa‘akea", "Kapuaoko‘olau", "Kapulei", "Kaunakakai", "Kawela", "Keawanui", "Keonekūʻino", "Keōpukaʻuʻuku", "Keōpukaloa", "Kïauea", "Kīpū", "Kumimi", "Kūpeke", "Lūpehu", "Makakupa‘ia", "Mākolelau", "Manawai", "Mapulehu", "Moakea", "Moanui", "Nāʻiwa", "Nihoa", "Pālāʻau", "Pōhakupili", "Puaʻahala", "Pūʻelelū", "Pūkoʻo 1", "Pūkoʻo 2", "Puna‘ula", "Pūniuʻōhua 1", "Pūniuʻōhua 2", "Waialua", "West ʻŌhiʻa"],
+          "ahupuaa_count": 54
+        },
+        "Koʻolau": {
+          "name": "Koʻolau",
+          "ahupuaa": ["Hālawa", "Kaiamiki", "Kalaupapa", "Kalawao", "Kīloa", "Makanalua", "Pelekunu", "Waikolu", "Wailau", "Wawaeolepe"],
+          "ahupuaa_count": 10
+        }
+      },
+      "moku_count": 2,
+      "total_ahupuaa": 64
+    },
+    "Molokini": {
+      "name": "Molokini",
+      "moku": {
+        "Honuaʻula": {
+          "name": "Honuaʻula",
+          "ahupuaa": "N/A",
+          "ahupuaa_count": 1
+        }
+      },
+      "moku_count": 1,
+      "total_ahupuaa": 1
+    },
+    "Niʻihau": {
+      "name": "Niʻihau",
+      "moku": {
+        "Kona": {
+          "name": "Kona",
+          "ahupuaa": "Waimea",
+          "ahupuaa_count": 1
+        }
+      },
+      "moku_count": 1,
+      "total_ahupuaa": 1
+    },
+    "Oʻahu": {
+      "name": "Oʻahu",
+      "moku": {
+        "Kona": {
+          "name": "Kona",
+          "ahupuaa": ["Honolulu", "Kahauiki", "Kalihi", "Kapālama", "Kuliʻouʻou", "Maunalua", "Moanalua", "Waikīkī"],
+          "ahupuaa_count": 8
+        },
+        "Koʻolauloa": {
+          "name": "Koʻolauloa",
+          "ahupuaa": ["Haleʻaha", "Hanakaʻoe", "Hauʻula", "ʻŌiʻo 1", "ʻŌiʻo 2", "ʻŌpana 1", "ʻŌpana 2", "Kahana", "Kahuku", "Kaʻaʻawa", "Kaipapaʻu", "Kaluanui", "Kapaka", "Kapano", "Kaunala", "Kawela", "Keana", "Lāʻiemaloʻo", "Lāʻiewai", "Mākao", "Makaua 1", "Makaua 2", "Malaekahana", "Pahipahiʻālua", "Papaʻakoko", "Paumalū", "Puheʻemiki", "Punalau", "Punaluʻu", "Pūpūkea", "Ulupehupehu", "Waialeʻe", "Waiʻono", "Waimea"],
+          "ahupuaa_count": 34
+        },
+        "Koʻolaupoko": {
+          "name": "Koʻolaupoko",
+          "ahupuaa": ["Hakipuʻu", "Heʻeia", "Kahaluʻu", "Kaʻalaea", "Kailua", "Kāneʻohe", "Kualoa 1", "Kualoa 2", "Waiāhole", "Waiheʻe", "Waikane", "Waimānalo"],
+          "ahupuaa_count": 12
+        },
+        "Waialua": {
+          "name": "Waialua",
+          "ahupuaa": ["Aukuʻu", "Kaʻena", "Kamananui", "Kapaeloa", "Kawaihāpai", "Kawailoa", "Keālia", "Kikahi", "Kuikuiloloa", "Lauhulu", "Mokulēʻia 1", "Mokulēʻia 2", "Paʻalaʻa", "Punanue"],
+          "ahupuaa_count": 14
+        },
+        "Waiʻanae": {
+          "name": "Waiʻanae",
+          "ahupuaa": ["ʻŌhikilolo", "Kahanahāiki", "Keaʻau", "Keawaʻula", "Mākaha", "Mākua", "Nānākuli", "Waiʻanae"],
+          "ahupuaa_count": 8
+        },
+        "ʻEwa": {
+          "name": "ʻEwa",
+          "ahupuaa": ["Hālawa", "Hōʻaeʻae", "Honouliuli", "ʻAiea", "Kalauao", "Mānana", "N/A", "Waiau", "Waiawa", "Waikele", "Waimalu", "Waimano", "Waipiʻo"],
+          "ahupuaa_count": 13
+        }
+      },
+      "moku_count": 6,
+      "total_ahupuaa": 89
+    }
+  },
+  "unique_values": {
+    "mokupuni": ["Hawaiʻi", "Kahoʻolawe", "Kauaʻi", "Lānaʻi", "Maui", "Molokaʻi", "Molokini", "Niʻihau", "Oʻahu"],
+    "moku": ["Haleleʻa", "Hāmākua", "Hāmākualoa", "Hāmākuapoko", "Hāna", "Hilo", "Honuaʻula", "ʻEwa", "Kahikinui", "Kāʻanapali", "Kaʻū", "Kaupō", "Kīpahulu", "Kohala", "Koʻolau", "Koʻolauloa", "Koʻolaupoko", "Kona", "Kula", "Lāhainā", "Nāpali", "Pūʻali Komohana", "Puna", "Waialua", "Waiʻanae"],
+    "ahupuaa": ["‘Aha‘ino 1", "‘Aha‘ino 2", "‘Ïloli", "‘Ualapu‘e", "Ahalanui, Laepaoʻo", "Aʻapueo", "Aki", "Alaeakila, Kaapahu", "Alakahi", "Aleamai", "Anahola", "Anapuka, Hoʻopūloa", "Apuakohau, Kukuiwaluhia", "Au 1-2, Āhualoa", "Aukuʻu", "Auwahi", "Awakeʻe", "Awalua", "East Hanawana", "East Honomāʻele", "East ʻŌhiʻa", "East Kaupakulua", "East Makaīwa", "East Waiakalua", "Grant 3584", "Hāhākea", "Hāʻena", "Haʻikū", "Haʻikū Uka", "Haina", "Hakalau", "Hakipuʻu", "Halaʻula", "Halakaʻa", "Hālawa", "Hālawa, Napapaʻa", "Halehaku", "Haleʻaha", "Halelua", "Halelua, Wailoa, Kumu", "Haleohiu", "Halepuaʻa, Kanekiki", "Hāliʻimaile", "Hāmākualoa", "Hāmākuapoko", "Hamanamana", "Hāmoa", "Hanakaʻoe", "Hanakaʻōʻō", "Hanakāpīʻai", "Hanakoa", "Hanalei", "Hanamāʻulu", "Hanapai, Niupuka", "Hanapēpē", "Hanehoi", "Haneoʻo", "Hauʻula", "Hauola", "Hāwī", "Heʻeia", "Hīleaiki", "Hīleanui", "Hionamoa", "Hōʻaeʻae", "Hōʻea, Manowaikohau", "Hoʻokena", "Hoʻolehua", "Hōlualoa 1-2", "Hōlualoa 3", "Hōlualoa 4", "Honalo, Māʻihi 1-2", "Hōnaunau", "Honohina", "Honoipu", "Honokahua", "Honokaia", "Honokalani", "Honokāne", "Honokeana", "Honokōhau", "Honokōhau 1-3", "Honokōwai", "Honokua", "Honolua", "Honolulu", "Honomainoa", "Honomakaʻu", "Honomanü", "Honomū, Kuhua", "Honomuni", "Honopou", "Honopū", "Honopue", "Honopueo", "Honoulimaloʻo", "Honouliuli", "Honouliwai", "Honuaʻula", "Honuʻapo", "Hulunanai", "Humuʻula", "ʻĀʻamakaō", "ʻĀʻāmanu", "ʻAiea", "ʻĀinakea", "ʻAlae", "ʻAlae 1-2", "ʻAlae 3-4", "ʻAlaeiki", "ʻAlaeloa", "ʻAlaenui", "ʻAlikā", "ʻAliomanu", "ʻAnaehoʻomalu", "ʻĀpua", "ʻĀwini", "ʻEleʻele", "ʻIole", "ʻŌhikilolo", "ʻOʻōkala", "ʻOʻoma 1", "ʻOʻoma 2", "ʻŌiʻo 1", "ʻŌiʻo 2", "ʻŌlaʻa", "ʻŌlelomoana 1-4, Opihihali", "ʻŌmaʻopio", "ʻŌpana", "ʻŌpana 1", "ʻŌpana 2", "ʻŌuli", "ʻUlaʻino", "ʻUpolu", "Iliʻililoa", "Ka‘ili‘ula", "Kahakuloa", "Kahaliʻi", "Kahaluʻu", "Kahana", "Kahanahāiki", "Kahananui", "Kahanui", "Kahaualeʻa", "Kahauiki", "Kahauloa 2", "Kāhei, Hualua", "Kahikinui", "Kāhili", "Kahilipaliiki, Kah", "Kahilipalinui", "Kahoahuna, Paʻana", "Kahua", "Kahuā 1", "Kahuā 2", "Kahue", "Kahuku", "Kahuwai", "Kaʻā", "Kaʻaʻawa", "Kaʻakaʻaniu", "Kaʻakepa", "Kaʻala", "Kaʻalaea", "Kaʻalaʻala, Kanaio", "Kaʻalāiki, Hiʻonaʻā", "Kaʻamola", "Kaʻāpahu", "Kaʻapoko", "Kaʻapuna", "Kaʻauhuhu", "Kaʻawaloa", "Kaʻena", "Kaʻieʻie", "Kaʻohe", "Kaʻohe 1-3", "Kaʻohe 4", "Kaʻohe 5", "Kaʻohe Mauka", "Kaʻonoʻulu", "Kaʻūpūlehu", "Kaiaʻakea", "Kaiamiki", "Kaihoʻonā", "Kaiholena", "Kaihuiki", "Kailua", "Kaimū", "Kainalu", "Kainehe", "Kaipapaʻu", "Kaipuhaʻa, Lamaloloa", "Kaiwiki", "Kaiwiki, Maumau", "Kaiwikinui", "Kākiʻo", "Kalāheo", "Kalāhiki", "Kalakalaula", "Kalala 1-2, Kokiʻo", "Kalalau", "Kalamaʻula", "Kalaoa", "Kalaoa 1-5", "Kalapakī", "Kalapana, Kupahua", "Kalauao", "Kalaupapa", "Kalawao", "Kalialinui", "Kalihi", "Kalihikai", "Kalihiwai", "Kaloʻi", "Kaloko", "Kalopā", "Kalua, Pakiloa, ʻŌuhi, Kaao", "Kalua‘aha", "Kaluako‘i", "Kaluanui", "Kalulu", "Kamaʻeʻe", "Kamāʻoa, Puʻuʻeo, Ke", "Kamaʻole", "Kamalō", "Kamalomaloʻo", "Kamananui", "Kamano", "Kamanoni", "Kamao", "Kamaui", "Kamehameiki", "Kamehamenui", "Kamiloloa", "Kamiloloa (Government)", "Kamoamoa", "Kamoauau", "Kamoku", "Kanahena", "Kanahonua", "Kanaio", "Kāneʻohe", "Kaohai", "Kapa‘akea", "Kapaeloa", "Kapaʻa", "Kapaʻanui", "Kapaʻau", "Kapaka", "Kapālama", "Kapano", "Kapāpala", "Kapoaula", "Kapoho", "Kapuaoko‘olau", "Kapuʻa", "Kapulei", "Kapulena", "Kapulena, Haukoʻi, K", "Kapunakea", "Kapunapuna", "Kau", "Kauaea", "Kauaʻula", "Kaueleau", "Kauhakō", "Kauhiula", "Kaukulau, Ki (b)", "Kaulana, Awalua, ʻŌhiki", "Kaulanamauna", "Kauleolī 1-2", "Kaumalumalu, Pāhoehoe", "Kaūmana", "Kaunakakai", "Kaunala", "Kaunāmano, Napauku", "Kaunolū", "Kaupakuea, Makea", "Kaupalaoa", "Kawaihae 1", "Kawaihae 2", "Kawaihāpai", "Kawailoa", "Kawainui", "Kawaipapa", "Kāwala", "Kawela", "Keaaula", "Keahialaka", "Keahuolū", "Keaʻā", "Keaʻau", "Keaīwa", "Kealahewa", "Kealakehe", "Kealakekua, Kīloa 1", "Kealakomo", "Keālia", "Keālia 1", "Keālia 2", "Keāliaaupuni", "Keāliakapu", "Kealiʻiiki", "Keana", "Keauhou", "Keauhou 1", "Keauhou 2", "Keauohana, Kehena", "Keawaʻula", "Keawanui", "Kehena 1, Kipi", "Kehena 2", "Keʻanae", "Keʻei 1", "Keʻei 2", "Keʻekeʻe 1-2, Kanakau", "Kemau", "Kēōkea", "Keonekūʻino", "Keonepokoiki", "Keonepokonui", "Keoniki, Kauniho, Wa", "Keōpukaʻuʻuku", "Keōpukaloa", "Kïauea", "Kīʻao", "Kiʻilae", "Kiʻiokalani", "Kīʻolokū", "Kikahi", "Kīkala", "Kīkala 1-2, Kēōkea", "Kīkoʻo", "Kīlauea", "Kīloa", "Kiolakaʻa, Puʻumakaʻā", "Kīpahoehoe", "Kīpū", "Kīpū Kai", "Kohanaiki", "Kōheo 1-2", "Koholālele", "Koʻokā", "Koʻolau", "Kokoiki", "Kolo", "Kōloa", "Koloaha, Kulihaʻi", "Kou", "Kualapa", "Kualoa 1", "Kualoa 2", "Kuholilea", "Kuhua", "Kuʻia", "Kuiaha", "Kuikuiloloa", "Kuilei 1-2", "Kūkaʻiau", "Kūkiʻo, Maniniʻōwali", "Kūkūau 1", "Kūkūau 2", "Kukuihaele", "Kukuihala, Kamāʻili", "Kukuiʻula", "Kukuiʻulaiki", "Kukuikea", "Kukuiopaʻe 1-2", "Kukuipahu", "Kula", "Kulaʻikahonu", "Kulaʻimano", "Kulanakiʻi, Kahīnano", "Kuliʻouʻou", "Kumimi", "Kūpeke", "Laeʻapuki, Pānaui-iki", "Lāʻiemaloʻo", "Lāʻiewai", "Laimi", "Lālāmilo, Keanuʻiʻomanō", "Lanihau 1-2, Moeauo", "Lanikepu", "Lauhulu", "Launiupoko", "Laupāhoehoe 1", "Laupāhoehoe, Welokā", "Lāwai", "Lepeuli", "Lepoloa, Kaluakailio", "Lumahaʻi", "Lūpehu", "Māhāʻulepū", "Mahaiʻula", "Mahana", "Māhinahina 4", "Māhukona, Hihiu, K", "Maʻulili", "Mailepai", "Mākaha", "Makahanaloa, Pepeʻekeo", "Makaʻehu", "Makaʻula", "Makakupa‘ia", "Makalawena", "Makanalua", "Makanikahio 1-2, Auau", "Mākao", "Makapala, Niuliʻi", "Makaua 1", "Makaua 2", "Makawao", "Makaweli", "Makeanehu", "Mākila", "Makiloa, Pahinahina", "Mākolelau", "Mākua", "Makuʻu, Pōpōkī, Hālo", "Malaekahana", "Malama 1", "Mālamalamaiki", "Malanahae", "Mānana", "Manawai", "Mānienie", "Manoloa", "Manowaialeʻe", "Manukā", "Mapulehu", "Maulili", "Mauluaiki", "Mauluanui", "Maunalei", "Maunalua", "Moakea", "Moaliʻi", "Moanalua", "Moanui", "Mohokea", "Mohokeanui", "Mohopilo", "Moʻoiki", "Moʻomoku", "Mokae", "Mokuhonua, Halepuna", "Mokulēʻia 1", "Mokulēʻia 2", "Mokuoniki", "Mokupapa", "Moloaʻa", "Momoualoa", "Mūʻolea", "N/A", "Naholoku", "Nāʻiwa", "Nakoʻoka, Laupāhoeho", "Nakula", "Nāmāhana", "Namoku, Papuaʻa", "Nānākuli", "Nānāwale", "Nanue", "Nāpili 1", "Nāpili 2-3", "Nāpili 4-5", "Nāwiliwili", "Nienie", "Nihoa", "Niumalu", "Niupea, Kealakaha", "North Olohena", "Nuʻu", "Nunuluiki", "Nunulunui", "Ohanaula", "Okoe 1-2", "Olowalu", "Onomea", "Opea, Peleau, ʻAwa", "Opihikao", "Opihilala", "Opihipau, Hukiaʻa", "Paeahu", "Pahipahiʻālua", "Pāhoa", "Pāhoehoe", "Pāhoehoe A 1-4, Mau", "Pāhoehoe B 1-3", "Pāʻā", "Paʻakea", "Paʻalaea", "Paʻalaʻa", "Pāʻauhau", "Pāʻauhau-mauka", "Pāʻauʻau 1, Palima", "Pāʻauʻau 2", "Paʻauilo", "Paʻawili", "Paʻuwela", "Paihaʻaloa", "Pākiniiki", "Pākininui, Puʻulena", "Pālāʻau", "Palauea", "Palauhulu 1-2", "Pālāwai", "Panaʻewa", "Pānauinui", "Paomai", "Pāpā 1", "Pāpā 2", "Papaʻa", "Pāpaʻa", "Pāpaʻaʻea", "Papaʻakoko", "Papaʻanui", "Pāpaʻikou", "Papaka Kai", "Papaka Uka", "Papaki", "Papalele", "Pauahi", "Paukaʻa", "Paumalū", "Paunau", "Peahi", "Pelekunu", "Pihā, Kahuku", "Piʻihonua", "Pīlaʻa", "Pōhakuao", "Pohakuhaku", "Pōhakulua", "Pōhakulua, Ahulua", "Pōhakupili", "Pohoiki", "Polaiki", "Polanui", "Pololū", "Ponahawai", "Poupou 1-2, Pūlama", "Puaʻa 1", "Puaʻa 2-3, Waiʻaha 1", "Puaʻahala", "Puaʻakuloa, Kapena", "Puaʻaluʻu", "Puaiki", "Puakea", "Puanui", "Puapuaʻa 2", "Puehuehu, Laʻaumama", "Pūehuehuiki", "Pūehuehunui", "Pueopaku", "Puheʻemiki", "Pūʻālaʻa", "Pūʻelelū", "Pūʻou", "Puʻuanahulu", "Puʻuepa", "Puʻuhaoa", "Puʻuʻeo", "Puʻukapu", "Puʻukawaiwai, Panoluʻukia", "Puʻuki", "Puʻukole, Koea, Lapakahi", "Puʻuokumau", "Puʻuomāile", "Puʻuwaʻawaʻa", "Pūkoʻo 1", "Pūkoʻo 2", "Pūlehuiki", "Pūlehunui", "Puna‘ula", "Punahoa 1", "Punahoa 2", "Punalau", "Punaluʻu", "Punanue", "Pūniuʻōhua 1", "Pūniuʻōhua 2", "Pūpūkea", "Puua", "Puumoi", "South Olohena", "Ukumehame", "Ulumalu", "Ulupehupehu", "Umauma", "Wahiawa", "Wahikuli", "Waʻawaʻa", "Waiāhole", "Waiakahiula, Kaʻohe", "Waiakalua", "Waiākea", "Waiakoa", "Waialeʻe", "Waialua", "Waiau", "Waiawa", "Waiea", "Waiehu", "Waiheʻe", "Waiʻaleʻale 1-2", "Waiʻanae", "Waiʻōhinu", "Waiʻoli", "Waiʻono", "Waikā", "Waikahekahe", "Waikahekaheiki", "Waikahekahenui", "Waikaʻalulu", "Waikākuʻu", "Waikane", "Waikapu", "Waikapū", "Waikaumalo", "Waikele", "Waikīkī", "Waikoekoe", "Waikoko", "Waikoloa", "Waikolu", "Wailau", "Wailau, Nīnole, Kaʻa", "Wailea", "Wailua", "Wailuaiki", "Wailuanui", "Wailuku", "Waimalu", "Waimānalo", "Waimano", "Waimanu", "Waimea", "Waimea, Waikoloa", "Wainaku", "Waineʻe", "Wainiha", "Waiohonu", "Waiohuli", "Waiomao", "Waipā", "Waipake", "Waipiʻo", "Waipiʻoiki", "Waipiʻonui", "Waipouli", "Waipunalei", "Wākiu", "Wawaeolepe", "Weha, Mahakuolo", "Weliweli", "West Hanawana", "West Honomāʻele", "West ʻŌhiʻa", "West Kaupakulua", "West Makaīwa", "West Waiakalua"]
+  },
+  "summary": {
+    "total_mokupuni": 9,
+    "total_moku": 25,
+    "total_ahupuaa": 662,
+    "mokupuni_details": {
+      "Hawaiʻi": {
+        "name": "Hawaiʻi",
+        "moku_count": 6,
+        "ahupuaa_count": 342
+      },
+      "Kahoʻolawe": {
+        "name": "Kahoʻolawe",
+        "moku_count": 1,
+        "ahupuaa_count": 1
+      },
+      "Kauaʻi": {
+        "name": "Kauaʻi",
+        "moku_count": 5,
+        "ahupuaa_count": 53
+      },
+      "Lānaʻi": {
+        "name": "Lānaʻi",
+        "moku_count": 1,
+        "ahupuaa_count": 13
+      },
+      "Maui": {
+        "name": "Maui",
+        "moku_count": 12,
+        "ahupuaa_count": 134
+      },
+      "Molokaʻi": {
+        "name": "Molokaʻi",
+        "moku_count": 2,
+        "ahupuaa_count": 64
+      },
+      "Molokini": {
+        "name": "Molokini",
+        "moku_count": 1,
+        "ahupuaa_count": 1
+      },
+      "Niʻihau": {
+        "name": "Niʻihau",
+        "moku_count": 1,
+        "ahupuaa_count": 1
+      },
+      "Oʻahu": {
+        "name": "Oʻahu",
+        "moku_count": 6,
+        "ahupuaa_count": 89
+      }
+    }
+  },
+  "flat_structure": [
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Alakahi"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Aleamai"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Hakalau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Haʻikū"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Honohina"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Honomainoa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Honomū, Kuhua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Humuʻula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kahaliʻi"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kahoahuna, Paʻana"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kahua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kaiaʻakea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kaihuiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kaiwiki, Maumau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kaiwikinui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kalalau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kalaoa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kamaʻeʻe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kauhiula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kaupakuea, Makea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kawainui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kaūmana"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kaʻakepa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kaʻapoko"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kaʻieʻie"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kukuikea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kulanakiʻi, Kahīnano"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kulaʻikahonu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kulaʻimano"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kīkala"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kūkūau 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Kūkūau 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Laimi"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Laupāhoehoe, Welokā"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Lepoloa, Kaluakailio"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Makahanaloa, Pepeʻekeo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Manoloa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Mauluaiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Mauluanui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Maʻulili"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Mokuhonua, Halepuna"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Mokuoniki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Mālamalamaiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Nanue"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Onomea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Opea, Peleau, ʻAwa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Paihaʻaloa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Paukaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Pihā, Kahuku"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Piʻihonua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Ponahawai"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Puaʻakuloa, Kapena"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Pueopaku"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Punahoa 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Punahoa 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Puumoi"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Puʻuʻeo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Pāhoehoe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Pāpaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Pāpaʻikou"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Umauma"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Waikaumalo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Wailea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Wailua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Wainaku"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Waipunalei"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "Waiākea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "ʻAlae"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hilo",
+      "ahupuaa": "ʻOʻōkala"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Alaeakila, Kaapahu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Au 1-2, Āhualoa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Haina"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Hanapai, Niupuka"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Hauola"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Honokaia"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Honopue"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Hōʻea, Manowaikohau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kainehe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kaiwiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kalakalaula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kalopā"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kalua, Pakiloa, ʻŌuhi, Kaao"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kamaui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kamoauau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kamoku"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kanahonua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kapoaula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kapulena"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kapulena, Haukoʻi, K"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kawela"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kaʻala"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kaʻauhuhu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kaʻohe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kaʻohe Mauka"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Keaʻā"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kemau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Koholālele"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Koloaha, Kulihaʻi"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kuilei 1-2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kukuihaele"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Kūkaʻiau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Laupāhoehoe 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Malanahae"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Manowaialeʻe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Moʻoiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Mānienie"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Nakoʻoka, Laupāhoeho"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Namoku, Papuaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Nienie"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Niupea, Kealakaha"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Opihilala"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Papaki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Papalele"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Papaʻanui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Paʻalaea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Paʻauilo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Pohakuhaku"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Pāʻauhau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Pāʻauhau-mauka"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Waikapu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Waikaʻalulu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Waikoekoe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Waikoloa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Waimanu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Waipiʻo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Waiʻaleʻale 1-2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "Weha, Mahakuolo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "ʻĀpua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Hāmākua",
+      "ahupuaa": "ʻĀʻāmanu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Halelua, Wailoa, Kumu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Hionamoa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Honuʻapo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Hīleaiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Hīleanui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kahilipaliiki, Kah"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kahilipalinui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kahuku"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kamāʻoa, Puʻuʻeo, Ke"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kapāpala"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kaunāmano, Napauku"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kawela"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kaʻalaʻala, Kanaio"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kaʻalāiki, Hiʻonaʻā"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Keauhou"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Keaīwa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kiolakaʻa, Puʻumakaʻā"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kāwala"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kīʻao"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Kīʻolokū"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Manukā"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Mohokea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Mohokeanui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Palauhulu 1-2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Punaluʻu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Pākiniiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Pākininui, Puʻulena"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Pāʻauʻau 1, Palima"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Pāʻauʻau 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Wailau, Nīnole, Kaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Waiomao"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kaʻū",
+      "ahupuaa": "Waiʻōhinu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Apuakohau, Kukuiwaluhia"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Awalua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Halaʻula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Halelua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Honoipu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Honokāne"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Honomakaʻu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Honopueo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Hālawa, Napapaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Hāwī"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Hāʻena"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kahuā 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kahuā 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kaiholena"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kaihoʻonā"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kaipuhaʻa, Lamaloloa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kalala 1-2, Kokiʻo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kamano"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kapaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kapaʻanui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kapaʻau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kapunapuna"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kapuʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kaupalaoa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kawaihae 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kawaihae 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kaʻauhuhu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kealahewa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kehena 1, Kipi"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kehena 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Keoniki, Kauniho, Wa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kiʻiokalani"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kokoiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kou"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kukuipahu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Kāhei, Hualua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Lanikepu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Lālāmilo, Keanuʻiʻomanō"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Makanikahio 1-2, Auau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Makapala, Niuliʻi"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Makeanehu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Makiloa, Pahinahina"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Maulili"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Momoualoa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Māhukona, Hihiu, K"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Nunuluiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Nunulunui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Ohanaula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Opihipau, Hukiaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Pauahi"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Pololū"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Puaiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Puakea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Puanui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Puehuehu, Laʻaumama"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Puʻuepa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Puʻukapu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Puʻukawaiwai, Panoluʻukia"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Puʻukole, Koea, Lapakahi"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Puʻuokumau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Pāhoa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Pōhakulua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Pōhakulua, Ahulua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Waikā"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "Waimea, Waikoloa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "ʻAnaehoʻomalu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "ʻIole"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "ʻUpolu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "ʻĀinakea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "ʻĀwini"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "ʻĀʻamakaō"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kohala",
+      "ahupuaa": "ʻŌuli"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Anapuka, Hoʻopūloa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Awakeʻe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Haleohiu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Hamanamana"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Honalo, Māʻihi 1-2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Honokua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Honokōhau 1-3"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Honuaʻula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Hoʻokena"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Hōlualoa 1-2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Hōlualoa 3"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Hōlualoa 4"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Hōnaunau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kahaluʻu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kahauloa 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kalaoa 1-5"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaloko"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kalāhiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kapuʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kauhakō"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaulana, Awalua, ʻŌhiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaulanamauna"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kauleolī 1-2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaumalumalu, Pāhoehoe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaʻapuna"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaʻawaloa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaʻohe 1-3"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaʻohe 4"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaʻohe 5"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaʻūpūlehu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keahuolū"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kealakehe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kealakekua, Kīloa 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keauhou 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keauhou 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keālia 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keālia 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keʻei 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keʻei 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keʻekeʻe 1-2, Kanakau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kiʻilae"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kohanaiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kolo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kukuiopaʻe 1-2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kēōkea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kīpahoehoe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kūkiʻo, Maniniʻōwali"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Lanihau 1-2, Moeauo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Mahaiʻula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Makalawena"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Makaʻula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Okoe 1-2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Puapuaʻa 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Puaʻa 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Puaʻa 2-3, Waiʻaha 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Puʻuanahulu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Puʻuwaʻawaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pāhoehoe A 1-4, Mau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pāhoehoe B 1-3"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pāpā 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pāpā 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Waiea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "Waikākuʻu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "ʻAlikā"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "ʻOʻoma 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "ʻOʻoma 2"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Kona",
+      "ahupuaa": "ʻŌlelomoana 1-4, Opihihali"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Ahalanui, Laepaoʻo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Halepuaʻa, Kanekiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Honolulu"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Hulunanai"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Iliʻililoa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kahaualeʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kahue"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kahuwai"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kaimū"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kalapana, Kupahua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kamoamoa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kapoho"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kauaea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kaueleau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kaukulau, Ki (b)"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Keahialaka"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kealakomo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Keauohana, Kehena"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Keaʻau"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Keonepokoiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Keonepokonui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kukuihala, Kamāʻili"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kula"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kīkala 1-2, Kēōkea"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Laeʻapuki, Pānaui-iki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Makuʻu, Pōpōkī, Hālo"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Malama 1"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Nānāwale"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Opihikao"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Pohoiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Poupou 1-2, Pūlama"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Puua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Pānauinui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Pūʻālaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Waiakahiula, Kaʻohe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Waikahekahe"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Waikahekaheiki"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Waikahekahenui"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "Waʻawaʻa"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "ʻĀpua"
+    },
+    {
+      "mokupuni": "Hawaiʻi",
+      "moku": "Puna",
+      "ahupuaa": "ʻŌlaʻa"
+    },
+    {
+      "mokupuni": "Kahoʻolawe",
+      "moku": "Honuaʻula",
+      "ahupuaa": "N/A"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Haleleʻa",
+      "ahupuaa": "Hanalei"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Haleleʻa",
+      "ahupuaa": "Hāʻena"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Haleleʻa",
+      "ahupuaa": "Kalihikai"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Haleleʻa",
+      "ahupuaa": "Kalihiwai"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Haleleʻa",
+      "ahupuaa": "Lumahaʻi"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Haleleʻa",
+      "ahupuaa": "Waikoko"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Haleleʻa",
+      "ahupuaa": "Wainiha"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Haleleʻa",
+      "ahupuaa": "Waipā"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Haleleʻa",
+      "ahupuaa": "Waiʻoli"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Hanapēpē"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kalāheo"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kōloa"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Lāwai"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Makaweli"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Māhāʻulepū"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pāʻā"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Wahiawa"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Waimea"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Weliweli"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Kona",
+      "ahupuaa": "ʻEleʻele"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Anahola"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "East Waiakalua"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Kaʻakaʻaniu"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Kāhili"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Kīlauea"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Lepeuli"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Moloaʻa"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Nāmāhana"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Papaʻa"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Pīlaʻa"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Waiakalua"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Waipake"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "West Waiakalua"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "ʻAliomanu"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Nāpali",
+      "ahupuaa": "Hanakoa"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Nāpali",
+      "ahupuaa": "Hanakāpīʻai"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Nāpali",
+      "ahupuaa": "Honopū"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Nāpali",
+      "ahupuaa": "Kalalau"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Nāpali",
+      "ahupuaa": "Pōhakuao"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Hanamāʻulu"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Haʻikū"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kalapakī"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kamalomaloʻo"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kapaʻa"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Keālia"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kīpū"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Kīpū Kai"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Niumalu"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "North Olohena"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Nāwiliwili"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "South Olohena"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Wailua"
+    },
+    {
+      "mokupuni": "Kauaʻi",
+      "moku": "Puna",
+      "ahupuaa": "Waipouli"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kalulu"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kamao"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kamoku"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kaohai"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kaunolū"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kaʻā"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Keāliaaupuni"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Keāliakapu"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Mahana"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Maunalei"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Paomai"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Paʻawili"
+    },
+    {
+      "mokupuni": "Lānaʻi",
+      "moku": "Lāhainā",
+      "ahupuaa": "Pālāwai"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Kalihi"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Kaloʻi"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Kanahena"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Kanaio"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Keauhou"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Kualapa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Mohopilo"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Palauea"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Papaka Kai"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Papaka Uka"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Honuaʻula",
+      "ahupuaa": "Papaʻanui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "East Hanawana"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "East Kaupakulua"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Halehaku"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Hanehoi"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Haʻikū"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Haʻikū Uka"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Honopou"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Hāmākualoa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Keaaula"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Kealiʻiiki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Kuiaha"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Mokupapa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Paʻuwela"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Peahi"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Ulumalu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Waipiʻoiki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "Waipiʻonui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "West Hanawana"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "West Kaupakulua"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākualoa",
+      "ahupuaa": "ʻŌpana"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākuapoko",
+      "ahupuaa": "Hāliʻimaile"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākuapoko",
+      "ahupuaa": "Hāmākuapoko"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāmākuapoko",
+      "ahupuaa": "Makawao"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "East Honomāʻele"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Haneoʻo"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Honokalani"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Hāmoa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Kawaipapa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Kawela"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Kākiʻo"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Mokae"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Mūʻolea"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Puaʻaluʻu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Puʻuhaoa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Wailua"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Waiohonu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "West Honomāʻele"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Hāna",
+      "ahupuaa": "Wākiu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kahikinui",
+      "ahupuaa": "Auwahi"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kahikinui",
+      "ahupuaa": "Kahikinui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kaupō",
+      "ahupuaa": "Naholoku"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kaupō",
+      "ahupuaa": "Nakula"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kaupō",
+      "ahupuaa": "Nuʻu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "East Makaīwa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "Honomanü"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "Keʻanae"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "Koʻolau"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "Paʻakea"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "Puʻuomāile"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "Pāpaʻaʻea"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "Wailuaiki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "Wailuanui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "West Makaīwa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Koʻolau",
+      "ahupuaa": "ʻUlaʻino"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Aʻapueo"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Kalialinui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Kamaʻole"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Kamehameiki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Kamehamenui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Kaʻonoʻulu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Kēōkea"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Kōheo 1-2"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Makaʻehu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Paeahu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Pūlehuiki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Pūlehunui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Waiakoa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "Waiohuli"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "ʻAlae 1-2"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "ʻAlae 3-4"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kula",
+      "ahupuaa": "ʻŌmaʻopio"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Honokahua"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Honokeana"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Honokōhau"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Honokōwai"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Honolua"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Kahakuloa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Kahana"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Mailepai"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Moʻomoku"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Māhinahina 4"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Nāpili 1"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Nāpili 2-3"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "Nāpili 4-5"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kāʻanapali",
+      "ahupuaa": "ʻAlaeloa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kīpahulu",
+      "ahupuaa": "Kaʻāpahu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kīpahulu",
+      "ahupuaa": "Kukuiʻula"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kīpahulu",
+      "ahupuaa": "Kukuiʻulaiki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kīpahulu",
+      "ahupuaa": "Kīkoʻo"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kīpahulu",
+      "ahupuaa": "ʻAlaeiki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Kīpahulu",
+      "ahupuaa": "ʻAlaenui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Aki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Grant 3584"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Halakaʻa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Hanakaʻōʻō"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Hāhākea"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kahua"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kapunakea"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kauaʻula"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Koʻokā"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kuholilea"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kuhua"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Kuʻia"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Launiupoko"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Moaliʻi"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Mākila"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Olowalu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Panaʻewa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Paunau"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Polaiki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Polanui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Puʻuki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Pāhoa"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Pūehuehuiki"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Pūehuehunui"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Pūʻou"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Ukumehame"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Wahikuli"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Lāhainā",
+      "ahupuaa": "Waineʻe"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Pūʻali Komohana",
+      "ahupuaa": "Waiehu"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Pūʻali Komohana",
+      "ahupuaa": "Waiheʻe"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Pūʻali Komohana",
+      "ahupuaa": "Waikapū"
+    },
+    {
+      "mokupuni": "Maui",
+      "moku": "Pūʻali Komohana",
+      "ahupuaa": "Wailuku"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "East ʻŌhiʻa"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Honomuni"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Honoulimaloʻo"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Honouliwai"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Hoʻolehua"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kahananui"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kahanui"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kainalu"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kalamaʻula"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaluako‘i"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kalua‘aha"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kamalō"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kamanoni"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kamiloloa"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kamiloloa (Government)"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kapa‘akea"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kapuaoko‘olau"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kapulei"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaunakakai"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kawela"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kaʻamola"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Ka‘ili‘ula"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keawanui"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keonekūʻino"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keōpukaloa"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Keōpukaʻuʻuku"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kumimi"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kïauea"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kīpū"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Kūpeke"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Lūpehu"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Makakupa‘ia"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Manawai"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Mapulehu"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Moakea"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Moanui"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Mākolelau"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Nihoa"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Nāʻiwa"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Puaʻahala"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Puna‘ula"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pālāʻau"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pōhakupili"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pūkoʻo 1"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pūkoʻo 2"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pūniuʻōhua 1"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pūniuʻōhua 2"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Pūʻelelū"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "Waialua"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "West ʻŌhiʻa"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "‘Aha‘ino 1"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "‘Aha‘ino 2"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "‘Ualapu‘e"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Kona",
+      "ahupuaa": "‘Ïloli"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Hālawa"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Kaiamiki"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Kalaupapa"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Kalawao"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Kīloa"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Makanalua"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Pelekunu"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Waikolu"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Wailau"
+    },
+    {
+      "mokupuni": "Molokaʻi",
+      "moku": "Koʻolau",
+      "ahupuaa": "Wawaeolepe"
+    },
+    {
+      "mokupuni": "Molokini",
+      "moku": "Honuaʻula",
+      "ahupuaa": "N/A"
+    },
+    {
+      "mokupuni": "Niʻihau",
+      "moku": "Kona",
+      "ahupuaa": "Waimea"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Kona",
+      "ahupuaa": "Honolulu"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Kona",
+      "ahupuaa": "Kahauiki"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Kona",
+      "ahupuaa": "Kalihi"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Kona",
+      "ahupuaa": "Kapālama"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Kona",
+      "ahupuaa": "Kuliʻouʻou"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Kona",
+      "ahupuaa": "Maunalua"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Kona",
+      "ahupuaa": "Moanalua"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Kona",
+      "ahupuaa": "Waikīkī"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Haleʻaha"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Hanakaʻoe"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Hauʻula"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Kahana"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Kahuku"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Kaipapaʻu"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Kaluanui"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Kapaka"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Kapano"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Kaunala"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Kawela"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Kaʻaʻawa"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Keana"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Lāʻiemaloʻo"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Lāʻiewai"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Makaua 1"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Makaua 2"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Malaekahana"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Mākao"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Pahipahiʻālua"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Papaʻakoko"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Paumalū"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Puheʻemiki"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Punalau"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Punaluʻu"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Pūpūkea"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Ulupehupehu"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Waialeʻe"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Waimea"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "Waiʻono"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "ʻŌiʻo 1"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "ʻŌiʻo 2"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "ʻŌpana 1"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolauloa",
+      "ahupuaa": "ʻŌpana 2"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Hakipuʻu"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Heʻeia"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Kahaluʻu"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Kailua"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Kaʻalaea"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Kualoa 1"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Kualoa 2"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Kāneʻohe"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Waiheʻe"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Waikane"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Waimānalo"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Koʻolaupoko",
+      "ahupuaa": "Waiāhole"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Aukuʻu"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Kamananui"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Kapaeloa"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Kawaihāpai"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Kawailoa"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Kaʻena"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Keālia"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Kikahi"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Kuikuiloloa"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Lauhulu"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Mokulēʻia 1"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Mokulēʻia 2"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Paʻalaʻa"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waialua",
+      "ahupuaa": "Punanue"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waiʻanae",
+      "ahupuaa": "Kahanahāiki"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waiʻanae",
+      "ahupuaa": "Keawaʻula"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waiʻanae",
+      "ahupuaa": "Keaʻau"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waiʻanae",
+      "ahupuaa": "Mākaha"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waiʻanae",
+      "ahupuaa": "Mākua"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waiʻanae",
+      "ahupuaa": "Nānākuli"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waiʻanae",
+      "ahupuaa": "Waiʻanae"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "Waiʻanae",
+      "ahupuaa": "ʻŌhikilolo"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Honouliuli"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Hālawa"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Hōʻaeʻae"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Kalauao"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Mānana"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "N/A"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Waiau"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Waiawa"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Waikele"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Waimalu"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Waimano"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "Waipiʻo"
+    },
+    {
+      "mokupuni": "Oʻahu",
+      "moku": "ʻEwa",
+      "ahupuaa": "ʻAiea"
+    }
+  ]
+}
