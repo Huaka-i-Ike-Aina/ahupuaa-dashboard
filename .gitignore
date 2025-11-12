@@ -9,3 +9,14 @@ processing_notebook_files/
 processing_notebook_files/libs
 
 ahupuaa_dashboard.html
+
+# Don't commit large raw carbon data
+raw_data/Carbon_Assessment_of_Hawaii_-_Land_Cover_-_Biome_Unit.geojson
+
+# Rendered HTML outputs (regenerated)
+*.html
+*_files/
+
+# Quarto cache
+_site/
+.quarto/

@@ -1,6 +1,10 @@
 ---
 title: "Data Processing Notebook"
 format: html
+execute:
+  eval: !expr Sys.getenv("CI", "false") == "false"
+  warning: false
+  message: false
 ---
 
 ```{r setup-install, include=FALSE}

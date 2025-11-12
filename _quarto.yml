@@ -1,0 +1,21 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - ahupuaa_dashboard.qmd
+    - processing_notebook.qmd
+
+website:
+  title: "Ahupuaa Dashboard"
+  navbar:
+    left:
+      - text: "Dashboard"
+        file: ahupuaa_dashboard.qmd
+      - text: "Data Processing"
+        file: processing_notebook.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-tools: true
